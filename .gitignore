@@ -1,0 +1,7 @@
+.svn
+.DS_Store
+*.pbxuser
+*.perspectivev3
+xcuserdata/
+/build/
+DerivedData

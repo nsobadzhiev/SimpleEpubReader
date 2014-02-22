@@ -442,6 +442,7 @@
 				239DEA9B18B8CC4500ECF1DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		239DEA9C18B8CC4500ECF1DD /* Build configuration list for PBXNativeTarget "SimpleEpubReaderTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +451,7 @@
 				239DEA9E18B8CC4500ECF1DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
