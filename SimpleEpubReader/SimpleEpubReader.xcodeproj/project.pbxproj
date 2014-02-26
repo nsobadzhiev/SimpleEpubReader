@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2325216018BE86C30076DA00 /* NSError+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 2325215F18BE86C30076DA00 /* NSError+Description.m */; };
+		2325216118BE86C30076DA00 /* NSError+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 2325215F18BE86C30076DA00 /* NSError+Description.m */; };
 		239DEA7118B8CC4400ECF1DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7018B8CC4400ECF1DD /* Foundation.framework */; };
 		239DEA7318B8CC4400ECF1DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */; };
 		239DEA7518B8CC4400ECF1DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7418B8CC4400ECF1DD /* UIKit.framework */; };
@@ -19,6 +21,14 @@
 		239DEA8C18B8CC4500ECF1DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7418B8CC4400ECF1DD /* UIKit.framework */; };
 		239DEA9418B8CC4500ECF1DD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 239DEA9218B8CC4500ECF1DD /* InfoPlist.strings */; };
 		239DEA9618B8CC4500ECF1DD /* SimpleEpubReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 239DEA9518B8CC4500ECF1DD /* SimpleEpubReaderTests.m */; };
+		23F189F618BBE73600EC3B92 /* DMTestableArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F189F518BBE73600EC3B92 /* DMTestableArchive.m */; };
+		23F189F918BBE7A200EC3B92 /* DMUnZipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F189F818BBE7A100EC3B92 /* DMUnZipTests.m */; };
+		23F189FC18BBECBD00EC3B92 /* DMTestableePubFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F189FB18BBECBD00EC3B92 /* DMTestableePubFileManager.m */; };
+		23F18A0018BBEE4000EC3B92 /* DMePubFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F189FF18BBEE4000EC3B92 /* DMePubFileManager.m */; };
+		23F18A0118BBEE4000EC3B92 /* DMePubFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F189FF18BBEE4000EC3B92 /* DMePubFileManager.m */; };
+		23F18A0318BBF93600EC3B92 /* libzipzap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23F18A0218BBF93600EC3B92 /* libzipzap.a */; };
+		23F18A0518BBF9CA00EC3B92 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23F18A0418BBF9CA00EC3B92 /* ImageIO.framework */; };
+		23F18A0718BBF9D300EC3B92 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23F18A0618BBF9D300EC3B92 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2325215E18BE86C30076DA00 /* NSError+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Description.h"; sourceTree = "<group>"; };
+		2325215F18BE86C30076DA00 /* NSError+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Description.m"; sourceTree = "<group>"; };
 		239DEA6D18B8CC4400ECF1DD /* SimpleEpubReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleEpubReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DEA7018B8CC4400ECF1DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,6 +60,16 @@
 		239DEA9118B8CC4500ECF1DD /* SimpleEpubReaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleEpubReaderTests-Info.plist"; sourceTree = "<group>"; };
 		239DEA9318B8CC4500ECF1DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		239DEA9518B8CC4500ECF1DD /* SimpleEpubReaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleEpubReaderTests.m; sourceTree = "<group>"; };
+		23F189F418BBE73600EC3B92 /* DMTestableArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMTestableArchive.h; path = TestableObjects/DMTestableArchive.h; sourceTree = "<group>"; };
+		23F189F518BBE73600EC3B92 /* DMTestableArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMTestableArchive.m; path = TestableObjects/DMTestableArchive.m; sourceTree = "<group>"; };
+		23F189F818BBE7A100EC3B92 /* DMUnZipTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMUnZipTests.m; sourceTree = "<group>"; };
+		23F189FA18BBECBD00EC3B92 /* DMTestableePubFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMTestableePubFileManager.h; path = TestableObjects/DMTestableePubFileManager.h; sourceTree = "<group>"; };
+		23F189FB18BBECBD00EC3B92 /* DMTestableePubFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMTestableePubFileManager.m; path = TestableObjects/DMTestableePubFileManager.m; sourceTree = "<group>"; };
+		23F189FE18BBEE4000EC3B92 /* DMePubFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMePubFileManager.h; path = ePub/DMePubFileManager.h; sourceTree = "<group>"; };
+		23F189FF18BBEE4000EC3B92 /* DMePubFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMePubFileManager.m; path = ePub/DMePubFileManager.m; sourceTree = "<group>"; };
+		23F18A0218BBF93600EC3B92 /* libzipzap.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzipzap.a; path = "../../../Library/Developer/Xcode/DerivedData/SimpleEpubReader-doekffuhhkijqqbgnqpyalucabvr/Build/Products/Debug/libzipzap.a"; sourceTree = "<group>"; };
+		23F18A0418BBF9CA00EC3B92 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		23F18A0618BBF9D300EC3B92 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23F18A0718BBF9D300EC3B92 /* libz.dylib in Frameworks */,
+				23F18A0518BBF9CA00EC3B92 /* ImageIO.framework in Frameworks */,
+				23F18A0318BBF93600EC3B92 /* libzipzap.a in Frameworks */,
 				239DEA7318B8CC4400ECF1DD /* CoreGraphics.framework in Frameworks */,
 				239DEA7518B8CC4400ECF1DD /* UIKit.framework in Frameworks */,
 				239DEA7118B8CC4400ECF1DD /* Foundation.framework in Frameworks */,
@@ -74,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2325215D18BE86C30076DA00 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				2325215E18BE86C30076DA00 /* NSError+Description.h */,
+				2325215F18BE86C30076DA00 /* NSError+Description.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		239DEA6418B8CC4400ECF1DD = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +130,9 @@
 		239DEA6F18B8CC4400ECF1DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				23F18A0618BBF9D300EC3B92 /* libz.dylib */,
+				23F18A0418BBF9CA00EC3B92 /* ImageIO.framework */,
+				23F18A0218BBF93600EC3B92 /* libzipzap.a */,
 				239DEA7018B8CC4400ECF1DD /* Foundation.framework */,
 				239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */,
 				239DEA7418B8CC4400ECF1DD /* UIKit.framework */,
@@ -107,6 +144,8 @@
 		239DEA7618B8CC4400ECF1DD /* SimpleEpubReader */ = {
 			isa = PBXGroup;
 			children = (
+				2325215D18BE86C30076DA00 /* Categories */,
+				23F189FD18BBEE0800EC3B92 /* ePub */,
 				239DEA7F18B8CC4400ECF1DD /* DMAppDelegate.h */,
 				239DEA8018B8CC4400ECF1DD /* DMAppDelegate.m */,
 				239DEA8218B8CC4400ECF1DD /* Images.xcassets */,
@@ -129,8 +168,10 @@
 		239DEA8F18B8CC4500ECF1DD /* SimpleEpubReaderTests */ = {
 			isa = PBXGroup;
 			children = (
+				23F189F718BBE74800EC3B92 /* TestableObjects */,
 				239DEA9518B8CC4500ECF1DD /* SimpleEpubReaderTests.m */,
 				239DEA9018B8CC4500ECF1DD /* Supporting Files */,
+				23F189F818BBE7A100EC3B92 /* DMUnZipTests.m */,
 			);
 			path = SimpleEpubReaderTests;
 			sourceTree = "<group>";
@@ -142,6 +183,26 @@
 				239DEA9218B8CC4500ECF1DD /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		23F189F718BBE74800EC3B92 /* TestableObjects */ = {
+			isa = PBXGroup;
+			children = (
+				23F189F418BBE73600EC3B92 /* DMTestableArchive.h */,
+				23F189F518BBE73600EC3B92 /* DMTestableArchive.m */,
+				23F189FA18BBECBD00EC3B92 /* DMTestableePubFileManager.h */,
+				23F189FB18BBECBD00EC3B92 /* DMTestableePubFileManager.m */,
+			);
+			name = TestableObjects;
+			sourceTree = "<group>";
+		};
+		23F189FD18BBEE0800EC3B92 /* ePub */ = {
+			isa = PBXGroup;
+			children = (
+				23F189FE18BBEE4000EC3B92 /* DMePubFileManager.h */,
+				23F189FF18BBEE4000EC3B92 /* DMePubFileManager.m */,
+			);
+			name = ePub;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +302,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				239DEA7D18B8CC4400ECF1DD /* main.m in Sources */,
+				23F18A0018BBEE4000EC3B92 /* DMePubFileManager.m in Sources */,
+				2325216018BE86C30076DA00 /* NSError+Description.m in Sources */,
 				239DEA8118B8CC4400ECF1DD /* DMAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +313,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				239DEA9618B8CC4500ECF1DD /* SimpleEpubReaderTests.m in Sources */,
+				23F189F618BBE73600EC3B92 /* DMTestableArchive.m in Sources */,
+				2325216118BE86C30076DA00 /* NSError+Description.m in Sources */,
+				23F18A0118BBEE4000EC3B92 /* DMePubFileManager.m in Sources */,
+				23F189FC18BBECBD00EC3B92 /* DMTestableePubFileManager.m in Sources */,
+				23F189F918BBE7A200EC3B92 /* DMUnZipTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,11 +426,21 @@
 		239DEA9A18B8CC4500ECF1DD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleEpubReader/SimpleEpubReader-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)/**",
+					"/usr/local/include/**",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "SimpleEpubReader/SimpleEpubReader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SimpleEpubReader-doekffuhhkijqqbgnqpyalucabvr/**",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SimpleEpubReader-doekffuhhkijqqbgnqpyalucabvr/Build/Products/Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -371,11 +449,21 @@
 		239DEA9B18B8CC4500ECF1DD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleEpubReader/SimpleEpubReader-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)/**",
+					"/usr/local/include/**",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "SimpleEpubReader/SimpleEpubReader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SimpleEpubReader-doekffuhhkijqqbgnqpyalucabvr/**",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SimpleEpubReader-doekffuhhkijqqbgnqpyalucabvr/Build/Products/Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -397,6 +485,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
 				INFOPLIST_FILE = "SimpleEpubReaderTests/SimpleEpubReaderTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -416,6 +509,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleEpubReader/SimpleEpubReader-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
 				INFOPLIST_FILE = "SimpleEpubReaderTests/SimpleEpubReaderTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
