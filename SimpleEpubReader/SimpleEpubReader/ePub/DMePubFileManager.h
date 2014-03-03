@@ -17,6 +17,8 @@
 - (id)init;
 - (id)initWithEpubPath:(NSString*)filePath;
 
-- (NSData*)contentXmlWithError:(NSError**)error;
+- (NSData*)contentXmlWithName:zipContentsName
+                        error:(NSError**)error;
+- (NSData*)containerXmlWithError:(NSError**)error;
 
 @end

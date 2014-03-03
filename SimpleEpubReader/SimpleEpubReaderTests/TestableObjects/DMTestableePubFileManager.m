@@ -32,4 +32,10 @@
     _archiver = archiver;
 }
 
+- (NSData*)dataForZipEntry:(ZZArchiveEntry*)entry
+                     error:(NSError**)error
+{
+    return [entry newDataWithError:error];
+}
+
 @end

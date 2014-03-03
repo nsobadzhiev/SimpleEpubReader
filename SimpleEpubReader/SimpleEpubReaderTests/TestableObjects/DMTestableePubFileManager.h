@@ -16,5 +16,7 @@
 
 - (id)initWithArchiverClass:(Class)archiveClass;
 - (ZZArchive*)zipArchiver;
+- (NSData*)dataForZipEntry:(ZZArchiveEntry*)entry
+                     error:(NSError**)error;
 
 @end

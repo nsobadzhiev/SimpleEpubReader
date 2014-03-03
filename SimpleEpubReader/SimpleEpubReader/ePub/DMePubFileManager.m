@@ -9,7 +9,7 @@
 #import "DMePubFileManager.h"
 #import "NSError+Description.h"
 
-static NSString* const k_contentXmlFileName = @"/META-INF/container.xml";
+static NSString* const k_containerXmlFileName = @"/META-INF/container.xml";
 
 @implementation DMePubFileManager
 
@@ -38,11 +38,12 @@ static NSString* const k_contentXmlFileName = @"/META-INF/container.xml";
     return self;
 }
 
-- (NSData*)contentXmlWithError:(NSError**)error
+- (NSData*)contentXmlWithName:zipContentsName
+                        error:(NSError**)error
 {
     for (ZZArchiveEntry* zipEntry in zipArchiver.entries)
     {
-        if ([zipEntry.fileName isEqualToString:k_contentXmlFileName])
+        if ([zipEntry.fileName isEqualToString:zipContentsName])
         {
             return [zipEntry newDataWithError:error];
         }
@@ -51,6 +52,12 @@ static NSString* const k_contentXmlFileName = @"/META-INF/container.xml";
                              domain:@"ePub read error"
                         description:@"No contents XML in ePub"];
     return nil;
+}
+
+- (NSData*)containerXmlWithError:(NSError**)error
+{
+    return [self contentXmlWithName:k_containerXmlFileName
+                              error:error];
 }
 
 @end

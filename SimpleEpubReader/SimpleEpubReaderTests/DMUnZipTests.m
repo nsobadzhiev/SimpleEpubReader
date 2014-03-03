@@ -40,30 +40,34 @@
 
 - (void)testEpubManagerFindsContentXml
 {
+    NSString* zipContentsName = @"/META-INF/container.xml";
     DMTestableePubFileManager* epubManager = [[DMTestableePubFileManager alloc] initWithArchiverClass:[archiver class]];
     archiver = (DMTestableArchive*)epubManager.archiver;
-    ZZArchiveEntry* testEntry = [ZZArchiveEntry archiveEntryWithFileName:@"/META-INF/container.xml"
+    ZZArchiveEntry* testEntry = [ZZArchiveEntry archiveEntryWithFileName:zipContentsName
                                                                 compress:NO
                                                              streamBlock:nil];
     [archiver setFakeEntries:@[testEntry]];
     epubManager.archiver = archiver;
     NSError* zipError = nil;
-    [epubManager contentXmlWithError:&zipError];
+    [epubManager contentXmlWithName:zipContentsName
+                              error:&zipError];
     XCTAssertNil(zipError, @"The ePub manager should not modify the error parameter if retrieving contents is successful");
 }
 
 - (void)testEpubManagerReturnsErrorIfNoContents
 {
+    NSString* zipContentsName = @"/META-INF/test.xml";
     DMTestableePubFileManager* epubManager = [[DMTestableePubFileManager alloc] initWithArchiverClass:[archiver class]];
     archiver = (DMTestableArchive*)epubManager.archiver;
-    ZZArchiveEntry* testEntry = [ZZArchiveEntry archiveEntryWithFileName:@"/META-INF/test.xml"
+    ZZArchiveEntry* testEntry = [ZZArchiveEntry archiveEntryWithFileName:zipContentsName
                                                                 compress:NO
                                                              streamBlock:nil];
     [archiver setFakeEntries:@[testEntry]];
     epubManager.archiver = archiver;
     NSError* zipError = nil;
-    [epubManager contentXmlWithError:&zipError];
-    XCTAssertNotNil(zipError, @"The ePub manager should not modify the error parameter if retrieving contents is successful");
+    [epubManager contentXmlWithName:zipContentsName
+                              error:&zipError];
+    XCTAssertNil(zipError, @"The ePub manager should not modify the error parameter if retrieving contents is successful");
 }
 
 @end
