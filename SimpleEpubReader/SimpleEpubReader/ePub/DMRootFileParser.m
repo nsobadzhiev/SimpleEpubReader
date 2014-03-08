@@ -6,15 +6,8 @@
 //  Copyright (c) 2014 Nikola Sobadjiev. All rights reserved.
 //
 
-//<?xml version="1.0" encoding="utf-8" standalone="no"?>
-//<container xmlns="urn:oasis:names:tc:opendocument:xmlns:container" version="1.0">
-//<rootfiles>
-//<rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
-//</rootfiles>
-//</container>
-
-
 #import "DMRootFileParser.h"
+#import "DDXMLNode+ChildForName.h"
 
 static NSString* const k_containerTagName = @"container";
 static NSString* const k_rootFilesTagName = @"rootfiles";
@@ -64,14 +57,7 @@ static NSString* const k_rootFileFullPathTagName = @"full-path";
 - (DDXMLNode*)childForName:(NSString*)name
                     inNode:(DDXMLNode*)node
 {
-    for (DDXMLNode* child in [node children])
-    {
-        if ([child.name isEqualToString:name])
-        {
-            return child;
-        }
-    }
-    return nil;
+    return [node childForName:name];
 }
 
 @end
