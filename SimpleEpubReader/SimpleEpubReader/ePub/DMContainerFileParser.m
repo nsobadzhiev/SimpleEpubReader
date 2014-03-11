@@ -34,12 +34,17 @@ static NSString* const k_itemIdRefAttrName = @"idref";
 - (DDXMLElement*)metadataElement;
 - (DDXMLElement*)spineElement;
 
+- (DMContainerItem*)itemForId:(NSString*)itemID
+                      inArray:(NSArray*)items;
 - (BOOL)itemsArray:(NSArray*)items
         containsId:(NSString*)itemID;
 
 @end
 
 @implementation DMContainerFileParser
+
+@synthesize epubHtmlItems;
+@synthesize spineItems;
 
 - (id)init
 {
@@ -65,6 +70,13 @@ static NSString* const k_itemIdRefAttrName = @"idref";
     return self;
 }
 
+- (DMePubItem*)epubItemForSpineElement:(DMSpineItem*)spineItem
+{
+    NSArray* allItems = self.epubHtmlItems;
+    return (DMePubItem*)[self itemForId:spineItem.itemID
+                                inArray:allItems];
+}
+
 - (NSString*)epubTitle
 {
     DDXMLElement* metadataElement = [self metadataElement];
@@ -75,38 +87,46 @@ static NSString* const k_itemIdRefAttrName = @"idref";
 
 - (NSArray*)epubHtmlItems
 {
-    NSArray* manifestEntries = [[self manifestElement] children];
-    NSMutableArray* epubItems = [NSMutableArray arrayWithCapacity:manifestEntries.count];
-    for (DDXMLElement* item in manifestEntries)
+    if (epubHtmlItems == nil)
     {
-        DDXMLNode* mediaTypeNode = [item attributeForName:k_manifestItemAttrName];
-        NSString* itemMediaType = [mediaTypeNode stringValue];
-        if ([itemMediaType isEqualToString:k_xhtmlItemAttrValue])
+        NSArray* manifestEntries = [[self manifestElement] children];
+        NSMutableArray* epubItems = [NSMutableArray arrayWithCapacity:manifestEntries.count];
+        for (DDXMLElement* item in manifestEntries)
         {
-            DDXMLNode* itemIdNode = [item attributeForName:k_itemIdAttrName];
-            NSString* itemId = [itemIdNode stringValue];
-            
-            DDXMLNode* hrefNode = [item attributeForName:k_hrefAttrName];
-            NSString* itemPath = [hrefNode stringValue];
-            
-            DMePubItem* epubItem = [DMePubItem ePubItemWithId:itemId mediaType:itemMediaType href:itemPath];
-            [epubItems addObject:epubItem];
+            DDXMLNode* mediaTypeNode = [item attributeForName:k_manifestItemAttrName];
+            NSString* itemMediaType = [mediaTypeNode stringValue];
+            if ([itemMediaType isEqualToString:k_xhtmlItemAttrValue])
+            {
+                DDXMLNode* itemIdNode = [item attributeForName:k_itemIdAttrName];
+                NSString* itemId = [itemIdNode stringValue];
+                
+                DDXMLNode* hrefNode = [item attributeForName:k_hrefAttrName];
+                NSString* itemPath = [hrefNode stringValue];
+                
+                DMePubItem* epubItem = [DMePubItem ePubItemWithId:itemId mediaType:itemMediaType href:itemPath];
+                [epubItems addObject:epubItem];
+            }
         }
+        epubHtmlItems = epubItems;
     }
-    return epubItems;
+    return epubHtmlItems;
 }
 
 - (NSArray*)spineItems
 {
-    NSArray* spineEntries = [[self spineElement] children];
-    NSMutableArray* spineItems = [NSMutableArray arrayWithCapacity:spineEntries.count];
-    for (DDXMLElement* item in spineEntries)
+    if (spineItems == nil)
     {
-        DDXMLNode* itemIdNode = [item attributeForName:k_itemIdRefAttrName];
-        NSString* itemId = [itemIdNode stringValue];
-        
-        DMSpineItem* spineItem = [DMSpineItem spineItemWithID:itemId];
-        [spineItems addObject:spineItem];
+        NSArray* spineEntries = [[self spineElement] children];
+        NSMutableArray* spineItemsArray = [NSMutableArray arrayWithCapacity:spineEntries.count];
+        for (DDXMLElement* item in spineEntries)
+        {
+            DDXMLNode* itemIdNode = [item attributeForName:k_itemIdRefAttrName];
+            NSString* itemId = [itemIdNode stringValue];
+            
+            DMSpineItem* spineItem = [DMSpineItem spineItemWithID:itemId];
+            [spineItemsArray addObject:spineItem];
+        }
+        spineItems = spineItemsArray;
     }
     return spineItems;
 }
@@ -114,9 +134,9 @@ static NSString* const k_itemIdRefAttrName = @"idref";
 - (NSArray*)filteredSpineItems
 {
     NSArray* allItems = self.epubHtmlItems;
-    NSArray* spineItems = self.spineItems;
+    NSArray* spineItemsArray = self.spineItems;
     NSMutableArray* filteredSpine = [NSMutableArray arrayWithCapacity:allItems.count];
-    for (DMSpineItem* spineItem in spineItems)
+    for (DMSpineItem* spineItem in spineItemsArray)
     {
         if ([self itemsArray:allItems
                   containsId:spineItem.itemID] == YES)
@@ -156,17 +176,24 @@ static NSString* const k_itemIdRefAttrName = @"idref";
     return spineElement;
 }
 
-- (BOOL)itemsArray:(NSArray*)items
-        containsId:(NSString*)itemID
+- (DMContainerItem*)itemForId:(NSString*)itemID
+                      inArray:(NSArray*)items
 {
     for (DMContainerItem* item in items)
     {
         if ([item.itemID isEqualToString:itemID])
         {
-            return YES;
+            return item;
         }
     }
-    return NO;
+    return nil;
+}
+
+- (BOOL)itemsArray:(NSArray*)items
+        containsId:(NSString*)itemID
+{
+    return ([self itemForId:itemID
+                   inArray:items] != nil);
 }
 
 @end

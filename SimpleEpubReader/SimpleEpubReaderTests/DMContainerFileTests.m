@@ -123,4 +123,15 @@
     XCTAssertEqualObjects([(DMSpineItem*)[spineItems firstObject] itemID], @"id2528567", @"Failed to retrieve the last spine item's ID");
 }
 
+- (void)testReadingItemForSpine
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package xmlns=\"http://www.idpf.org/2007/opf\" version=\"2.0\" unique-identifier=\"bookid\">    <metadata>    <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>    <dc:language xmlns:dc=\"http://purl.org/dc/elements/1.1/\">en</dc:language>    <meta name=\"cover\" content=\"cover-image\"/>    </metadata>    <manifest>    <item id=\"id2778030\" href=\"index.html\" media-type=\"application/xml\"/>   <item id=\"id2528567\" href=\"pr01.html\" media-type=\"application/xhtml+xml\"/>    </manifest>    <spine toc=\"ncxtoc\">    <itemref idref=\"id2778030\"/>    <itemref idref=\"id2528567\"/>    </spine>    </package>";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    NSArray* spineItems = [containerParser filteredSpineItems];
+    DMePubItem* epubItem = [containerParser epubItemForSpineElement:(DMSpineItem*)[spineItems firstObject]];
+    XCTAssertEqualObjects([epubItem itemID], @"id2528567", @"Failed to retrieve the spine item's ID");
+    XCTAssertEqualObjects([epubItem href], @"pr01.html", @"Failed to retrieve the spine item's path");
+}
+
 @end

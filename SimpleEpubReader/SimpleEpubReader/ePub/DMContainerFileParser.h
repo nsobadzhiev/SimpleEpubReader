@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "DDXMLDocument.h"
+#import "DMePubItem.h"
+#import "DMSpineItem.h"
 
 @interface DMContainerFileParser : NSObject
 {
     DDXMLDocument* containerXml;
+    
+    NSArray* epubHtmlItems;
+    NSArray* spineItems;
 }
 
 @property (nonatomic, readonly) NSString* epubTitle;
@@ -20,5 +25,7 @@
 @property (nonatomic, readonly) NSArray* filteredSpineItems;
 
 - (id)initWithData:(NSData*)containerData;
+
+- (DMePubItem*)epubItemForSpineElement:(DMSpineItem*)spineItem;
 
 @end
