@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DDXMLDocument.h"
+#import "DMTableOfContentsItem.h"
 
 @interface DMTableOfContents : NSObject
 {
@@ -16,7 +17,10 @@
 
 @property (nonatomic, readonly) NSString* title;
 @property (nonatomic, readonly) NSArray* topLevelItems;
+@property (nonatomic, readonly) NSArray* allItems;
 
 - (instancetype)initWithData:(NSData*)tocData;
+
+- (NSArray*)subItemsForItem:(DMTableOfContentsItem*)item;
 
 @end

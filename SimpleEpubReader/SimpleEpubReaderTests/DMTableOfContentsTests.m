@@ -71,4 +71,65 @@
     XCTAssertEqualObjects([(DMTableOfContentsItem*)[topItems lastObject] path], @"ch01.xhtml", @"%@ does not match the expected item path - ch01.xhtml", [(DMTableOfContentsItem*)[topItems firstObject] path]);
 }
 
+- (void)testRetrievingAllTocItems
+{
+    NSString* tocString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>    <!DOCTYPE html>    <html>	<body>    <nav epub:type=\"toc\" id=\"toc\">    <ol>    <li><a href=\"pr01.xhtml\">Preface</a>    <ol>    <li><a href=\"pr01.xhtml#I_sect1_d1e137\">Conventions Used in This Book</a></li>    <li><a href=\"pr01s05.xhtml\">Acknowledgments</a></li>    </ol>    </li>    </ol>    </nav>	</body>    </html>";
+    NSData* tocData = [tocString dataUsingEncoding:NSUTF8StringEncoding];
+    DMTableOfContents* toc = [[DMTableOfContents alloc] initWithData:tocData];
+    NSArray* tocItems = [toc allItems];
+    XCTAssertEqual(tocItems.count, 3, @"%d is a wrong toc items count", tocItems.count);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems firstObject] name], @"Preface", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems firstObject] name]);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems firstObject] path], @"pr01.xhtml", @"%@ does not match the expected item path", [(DMTableOfContentsItem*)[tocItems firstObject] path]);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems objectAtIndex:1] name], @"Conventions Used in This Book", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems objectAtIndex:1] name]);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems objectAtIndex:1] path], @"pr01.xhtml#I_sect1_d1e137", @"%@ does not match the expected item path", [(DMTableOfContentsItem*)[tocItems objectAtIndex:1] path]);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems lastObject] name], @"Acknowledgments", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems lastObject] name]);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems lastObject] path], @"pr01s05.xhtml", @"%@ does not match the expected item path", [(DMTableOfContentsItem*)[tocItems lastObject] path]);
+}
+
+- (void)testRetrievingTocItemsLevel
+{
+    NSString* tocString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>    <!DOCTYPE html>    <html>	<body>    <nav epub:type=\"toc\" id=\"toc\">    <ol>    <li><a href=\"pr01.xhtml\">Preface</a>    <ol>    <li><a href=\"pr01.xhtml#I_sect1_d1e137\">Conventions Used in This Book</a></li>    <li><a href=\"pr01s05.xhtml\">Acknowledgments</a></li>    </ol>    </li>    </ol>    </nav>	</body>    </html>";
+    NSData* tocData = [tocString dataUsingEncoding:NSUTF8StringEncoding];
+    DMTableOfContents* toc = [[DMTableOfContents alloc] initWithData:tocData];
+    NSArray* tocItems = [toc allItems];
+    XCTAssertEqual([(DMTableOfContentsItem*)[tocItems firstObject] level], 1, @"This item should be from level 0 in the toc list");
+    XCTAssertEqual([(DMTableOfContentsItem*)[tocItems objectAtIndex:1] level], 2, @"This item should be from level 1 in the toc list");
+    XCTAssertEqual([(DMTableOfContentsItem*)[tocItems objectAtIndex:2] level], 2, @"This item should be from level 1 in the toc list");
+}
+
+- (void)testRetrievingParentForItem
+{
+    NSString* tocString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>    <!DOCTYPE html>    <html>	<body>    <nav epub:type=\"toc\" id=\"toc\">    <ol>    <li><a href=\"pr01.xhtml\">Preface</a>    <ol>    <li><a href=\"pr01.xhtml#I_sect1_d1e137\">Conventions Used in This Book</a></li>    <li><a href=\"pr01s05.xhtml\">Acknowledgments</a></li>    </ol>    </li>    </ol>    </nav>	</body>    </html>";
+    NSData* tocData = [tocString dataUsingEncoding:NSUTF8StringEncoding];
+    DMTableOfContents* toc = [[DMTableOfContents alloc] initWithData:tocData];
+    NSArray* tocItems = [toc allItems];
+    DMTableOfContentsItem* parent = [tocItems firstObject];
+    XCTAssertEqualObjects(parent, [(DMTableOfContentsItem*)[tocItems objectAtIndex:1] parent], @"Item 1 does not have the right parent");
+    XCTAssertEqualObjects(parent, [(DMTableOfContentsItem*)[tocItems objectAtIndex:2] parent], @"Item 2 does not have the right parent");
+}
+
+- (void)testRetrievingTocItemsForParent
+{
+    NSString* tocString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>    <!DOCTYPE html>    <html>	<body>    <nav epub:type=\"toc\" id=\"toc\">    <ol>    <li><a href=\"pr01.xhtml\">Preface</a>    <ol>    <li><a href=\"pr01.xhtml#I_sect1_d1e137\">Conventions Used in This Book</a></li>    <li><a href=\"pr01s05.xhtml\">Acknowledgments</a></li>    </ol>    </li>    </ol>    </nav>	</body>    </html>";
+    NSData* tocData = [tocString dataUsingEncoding:NSUTF8StringEncoding];
+    DMTableOfContents* toc = [[DMTableOfContents alloc] initWithData:tocData];
+    NSArray* tocItems = [toc allItems];
+    NSArray* tocChildren = [toc subItemsForItem:[tocItems firstObject]];
+    XCTAssertEqual(tocChildren.count, 2, @"%d is a wrong toc subitems count", tocItems.count);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocChildren firstObject] name], @"Conventions Used in This Book", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems objectAtIndex:1] name]);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocChildren firstObject] path], @"pr01.xhtml#I_sect1_d1e137", @"%@ does not match the expected item path", [(DMTableOfContentsItem*)[tocItems objectAtIndex:1] path]);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocChildren lastObject] name], @"Acknowledgments", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems lastObject] name]);
+    XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocChildren lastObject] path], @"pr01s05.xhtml", @"%@ does not match the expected item path", [(DMTableOfContentsItem*)[tocItems lastObject] path]);
+}
+
+- (void)testRetrievingItemsForParentWithNoChildren
+{
+    NSString* tocString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>    <!DOCTYPE html>    <html>	<body>    <nav epub:type=\"toc\" id=\"toc\">    <ol>    <li><a href=\"pr01.xhtml\">Preface</a>    <ol>    <li><a href=\"pr01.xhtml#I_sect1_d1e137\">Conventions Used in This Book</a></li>    <li><a href=\"pr01s05.xhtml\">Acknowledgments</a></li>    </ol>    </li>    </ol>    </nav>	</body>    </html>";
+    NSData* tocData = [tocString dataUsingEncoding:NSUTF8StringEncoding];
+    DMTableOfContents* toc = [[DMTableOfContents alloc] initWithData:tocData];
+    NSArray* tocItems = [toc allItems];
+    NSArray* tocChildren = [toc subItemsForItem:[tocItems lastObject]];
+    XCTAssertNil(tocChildren, @"A leaf item should ahve no children");
+}
+
 @end

@@ -12,8 +12,14 @@
 
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* path;
+@property (nonatomic, strong) DMTableOfContentsItem* parent;
+@property (nonatomic, strong) NSArray* subItems;
+@property (nonatomic) NSUInteger level;
 
 - (instancetype)initWithName:(NSString*)name
                      andPath:(NSString*)path;
+- (instancetype)initWithName:(NSString *)name 
+                        path:(NSString *)path 
+                      parent:(DMTableOfContentsItem*)parent;
 
 @end

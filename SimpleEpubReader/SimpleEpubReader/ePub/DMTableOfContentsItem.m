@@ -13,11 +13,22 @@
 - (instancetype)initWithName:(NSString*)name
                      andPath:(NSString*)path
 {
+    return [self initWithName:name
+                         path:path
+                        parent:nil];
+}
+
+- (instancetype)initWithName:(NSString *)name 
+                        path:(NSString *)path 
+                      parent:(DMTableOfContentsItem*)parent
+{
     self = [super init];
     if (self)
     {
         self.name = name;
         self.path = path;
+        self.parent = parent;
+        self.level = parent.level + 1;
     }
     return self;
 }
@@ -25,7 +36,8 @@
 - (instancetype)init
 {
     return [self initWithName:nil
-                      andPath:nil];
+                         path:nil
+                        parent:nil];
 }
 
 @end

@@ -27,7 +27,12 @@ static NSString* const k_htmlNavTag = @"nav";
 - (DDXMLElement*)headElement;
 - (DDXMLElement*)bodyElement;
 
-- (DMTableOfContentsItem*)tocItemFromXmlNode:(DDXMLElement*)xmlElement;
+- (DMTableOfContentsItem*)tocItemFromXmlNode:(DDXMLElement*)xmlElement
+                                  parentItem:(DMTableOfContentsItem*)parent;
+- (DDXMLElement*)rootListItem;
+- (NSArray*)tocItemsFromXmlNode:(DDXMLElement*)xmlElement
+                      recursive:(BOOL)recursive
+                     parentItem:(DMTableOfContentsItem*)parent;
 
 @end
 
@@ -56,6 +61,11 @@ static NSString* const k_htmlNavTag = @"nav";
     return [self initWithData:nil];
 }
 
+- (NSArray*)subItemsForItem:(DMTableOfContentsItem*)item
+{
+    return item.subItems;
+}
+
 - (NSString*)title
 {
     DDXMLElement* headElement = [self headElement];
@@ -78,26 +88,18 @@ static NSString* const k_htmlNavTag = @"nav";
 
 - (NSArray*)topLevelItems
 {
-    DDXMLElement* bodyElement = [self bodyElement];
-    DDXMLElement* navElement = (DDXMLElement*)[bodyElement childForName:k_htmlNavTag];
-    DDXMLElement* topLevelListElement = (DDXMLElement*)[navElement childForName:k_htmlOrderedListTag];
-    NSArray* topLevelListItems = [topLevelListElement elementsForName:k_htmlListItemTag];
-    NSMutableArray* topLevelItems = [NSMutableArray arrayWithCapacity:topLevelListItems.count];
-    for (DDXMLNode* listItem in topLevelListItems)
-    {
-        DDXMLElement* aItem = (DDXMLElement*)[listItem childForName:k_htmlLinkTag];
-        DDXMLElement* spanItem = (DDXMLElement*)[listItem childForName:k_htmlSpanTag];
-        DMTableOfContentsItem* tocItem = [self tocItemFromXmlNode:aItem];
-        if (tocItem == nil)
-        {
-            tocItem = [self tocItemFromXmlNode:spanItem];
-        }
-        if (tocItem != nil)
-        {
-            [topLevelItems addObject:tocItem];
-        }
-    }
-    return [NSArray arrayWithArray:topLevelItems];
+    DDXMLElement* topLevelListElement = [self rootListItem];
+    return [self tocItemsFromXmlNode:topLevelListElement
+                           recursive:NO
+                          parentItem:nil];
+}
+
+- (NSArray*)allItems
+{
+    DDXMLElement* topLevelListElement = [self rootListItem];
+    return [self tocItemsFromXmlNode:topLevelListElement
+                           recursive:YES
+                          parentItem:nil];
 }
 
 - (DDXMLElement*)headElement
@@ -113,13 +115,59 @@ static NSString* const k_htmlNavTag = @"nav";
 }
 
 - (DMTableOfContentsItem*)tocItemFromXmlNode:(DDXMLElement*)xmlElement
+                                  parentItem:(DMTableOfContentsItem*)parent;
 {
     NSString* itemName = [xmlElement stringValue];
     DDXMLNode* itemPathNode = [xmlElement attributeForName:k_htmlHrefAttr];
     NSString* itemPath = [itemPathNode stringValue];
     DMTableOfContentsItem* tocItem = [[DMTableOfContentsItem alloc] initWithName:itemName
-                                                                         andPath:itemPath];
+                                                                         path:itemPath
+                                                                          parent:parent];
     return tocItem;
+}
+
+- (DDXMLElement*)rootListItem
+{
+    DDXMLElement* bodyElement = [self bodyElement];
+    DDXMLElement* navElement = (DDXMLElement*)[bodyElement childForName:k_htmlNavTag];
+    return navElement;
+}
+
+- (NSArray*)tocItemsFromXmlNode:(DDXMLElement*)xmlElement
+                      recursive:(BOOL)recursive
+                     parentItem:(DMTableOfContentsItem*)parent;
+{
+    DDXMLElement* topLevelListElement = (DDXMLElement*)[xmlElement childForName:k_htmlOrderedListTag];
+    NSArray* topLevelListItems = [topLevelListElement elementsForName:k_htmlListItemTag];
+    NSMutableArray* topLevelItems = [NSMutableArray arrayWithCapacity:topLevelListItems.count];
+    for (DDXMLNode* listItem in topLevelListItems)
+    {
+        DDXMLElement* aItem = (DDXMLElement*)[listItem childForName:k_htmlLinkTag];
+        DDXMLElement* spanItem = (DDXMLElement*)[listItem childForName:k_htmlSpanTag];
+        DMTableOfContentsItem* tocItem = [self tocItemFromXmlNode:aItem
+                                                       parentItem:parent];
+        if (tocItem == nil)
+        {
+            tocItem = [self tocItemFromXmlNode:spanItem
+                                    parentItem:parent];
+        }
+        if (tocItem != nil)
+        {
+            [topLevelItems addObject:tocItem];
+            if (recursive == YES)
+            {
+                NSArray* subItems = [self tocItemsFromXmlNode:(DDXMLElement*)listItem
+                                                    recursive:recursive
+                                                   parentItem:tocItem];
+                if (subItems.count > 0)
+                {
+                    tocItem.subItems = subItems;
+                    [topLevelItems addObjectsFromArray:subItems];
+                }
+            }
+        }
+    }
+    return [NSArray arrayWithArray:topLevelItems];
 }
 
 @end
