@@ -77,7 +77,7 @@
     NSData* tocData = [tocString dataUsingEncoding:NSUTF8StringEncoding];
     DMTableOfContents* toc = [[DMTableOfContents alloc] initWithData:tocData];
     NSArray* tocItems = [toc allItems];
-    XCTAssertEqual(tocItems.count, 3, @"%d is a wrong toc items count", tocItems.count);
+    XCTAssertEqual(tocItems.count, 3, @"%lu is a wrong toc items count", (unsigned long)tocItems.count);
     XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems firstObject] name], @"Preface", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems firstObject] name]);
     XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems firstObject] path], @"pr01.xhtml", @"%@ does not match the expected item path", [(DMTableOfContentsItem*)[tocItems firstObject] path]);
     XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems objectAtIndex:1] name], @"Conventions Used in This Book", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems objectAtIndex:1] name]);
@@ -115,7 +115,7 @@
     DMTableOfContents* toc = [[DMTableOfContents alloc] initWithData:tocData];
     NSArray* tocItems = [toc allItems];
     NSArray* tocChildren = [toc subItemsForItem:[tocItems firstObject]];
-    XCTAssertEqual(tocChildren.count, 2, @"%d is a wrong toc subitems count", tocItems.count);
+    XCTAssertEqual(tocChildren.count, 2, @"%lu is a wrong toc subitems count", (unsigned long)tocItems.count);
     XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocChildren firstObject] name], @"Conventions Used in This Book", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems objectAtIndex:1] name]);
     XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocChildren firstObject] path], @"pr01.xhtml#I_sect1_d1e137", @"%@ does not match the expected item path", [(DMTableOfContentsItem*)[tocItems objectAtIndex:1] path]);
     XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocChildren lastObject] name], @"Acknowledgments", @"%@ does not match the expected item name", [(DMTableOfContentsItem*)[tocItems lastObject] name]);

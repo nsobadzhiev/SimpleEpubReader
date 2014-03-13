@@ -23,6 +23,7 @@
 @property (nonatomic, readonly) NSArray* epubHtmlItems;
 @property (nonatomic, readonly) NSArray* spineItems;
 @property (nonatomic, readonly) NSArray* filteredSpineItems;
+@property (nonatomic, readonly) DMePubItem* navigationItem;
 
 - (id)initWithData:(NSData*)containerData;
 

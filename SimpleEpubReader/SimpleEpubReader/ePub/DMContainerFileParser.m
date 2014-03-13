@@ -23,6 +23,8 @@ static NSString* const k_xhtmlItemAttrValue = @"application/xhtml+xml";
 static NSString* const k_manifestItemAttrName = @"media-type";
 static NSString* const k_itemIdAttrName = @"id";
 static NSString* const k_hrefAttrName = @"href";
+static NSString* const k_propertiesAttrName = @"properties";
+static NSString* const k_propertiesAttrNavValue = @"nav";
 
 // Spine item attributes
 static NSString* const k_itemIdRefAttrName = @"idref";
@@ -38,6 +40,7 @@ static NSString* const k_itemIdRefAttrName = @"idref";
                       inArray:(NSArray*)items;
 - (BOOL)itemsArray:(NSArray*)items
         containsId:(NSString*)itemID;
+- (DMePubItem*)epubItemFromXml:(DDXMLElement*)xmlNode;
 
 @end
 
@@ -97,13 +100,7 @@ static NSString* const k_itemIdRefAttrName = @"idref";
             NSString* itemMediaType = [mediaTypeNode stringValue];
             if ([itemMediaType isEqualToString:k_xhtmlItemAttrValue])
             {
-                DDXMLNode* itemIdNode = [item attributeForName:k_itemIdAttrName];
-                NSString* itemId = [itemIdNode stringValue];
-                
-                DDXMLNode* hrefNode = [item attributeForName:k_hrefAttrName];
-                NSString* itemPath = [hrefNode stringValue];
-                
-                DMePubItem* epubItem = [DMePubItem ePubItemWithId:itemId mediaType:itemMediaType href:itemPath];
+                DMePubItem* epubItem = [self epubItemFromXml:item];
                 [epubItems addObject:epubItem];
             }
         }
@@ -145,6 +142,21 @@ static NSString* const k_itemIdRefAttrName = @"idref";
         }
     }
     return [NSArray arrayWithArray:filteredSpine];
+}
+
+- (DMePubItem*)navigationItem
+{
+    NSArray* manifestEntries = [[self manifestElement] children];
+    for (DDXMLElement* item in manifestEntries)
+    {
+        DDXMLNode* propertyNode = [item attributeForName:k_propertiesAttrName];
+        NSString* propertyValue = [propertyNode stringValue];
+        if ([propertyValue isEqualToString:k_propertiesAttrNavValue])
+        {
+            return [self epubItemFromXml:item];
+        }
+    }
+    return nil;
 }
 
 #pragma mark PrivateMethods
@@ -194,6 +206,21 @@ static NSString* const k_itemIdRefAttrName = @"idref";
 {
     return ([self itemForId:itemID
                    inArray:items] != nil);
+}
+
+- (DMePubItem*)epubItemFromXml:(DDXMLElement*)xmlNode
+{
+    DDXMLNode* mediaTypeNode = [xmlNode attributeForName:k_manifestItemAttrName];
+    NSString* itemMediaType = [mediaTypeNode stringValue];
+    
+    DDXMLNode* itemIdNode = [xmlNode attributeForName:k_itemIdAttrName];
+    NSString* itemId = [itemIdNode stringValue];
+    
+    DDXMLNode* hrefNode = [xmlNode attributeForName:k_hrefAttrName];
+    NSString* itemPath = [hrefNode stringValue];
+    
+    DMePubItem* epubItem = [DMePubItem ePubItemWithId:itemId mediaType:itemMediaType href:itemPath];
+    return epubItem;
 }
 
 @end

@@ -134,4 +134,14 @@
     XCTAssertEqualObjects([epubItem href], @"pr01.html", @"Failed to retrieve the spine item's path");
 }
 
+- (void)testReadingTheNavigationItem
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package>	<manifest>    <item id=\"htmltoc\" properties=\"nav\" media-type=\"application/xhtml+xml\" href=\"bk01-toc.xhtml\"/>    <item media-type=\"text/css\" id=\"epub-css\" href=\"css/epub.css\"/>	</manifest>    </package>";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    DMePubItem* navItem = [containerParser navigationItem];
+    XCTAssertEqualObjects([navItem itemID], @"htmltoc", @"Failed to retrieve the nav item's ID");
+    XCTAssertEqualObjects([navItem href], @"bk01-toc.xhtml", @"Failed to retrieve the nav item's path");
+}
+
 @end
