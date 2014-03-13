@@ -10,6 +10,10 @@
 		23022E9318C52B7E00DF1C65 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A72BA318C52A3A00B5B7B8 /* libxml2.dylib */; };
 		2325216018BE86C30076DA00 /* NSError+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 2325215F18BE86C30076DA00 /* NSError+Description.m */; };
 		2325216118BE86C30076DA00 /* NSError+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 2325215F18BE86C30076DA00 /* NSError+Description.m */; };
+		23322D0E18D1BBD7002984D1 /* DMePubManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D0D18D1BBD7002984D1 /* DMePubManagerTests.m */; };
+		23322D1118D1C36C002984D1 /* DMePubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1018D1C36C002984D1 /* DMePubManager.m */; };
+		23322D1218D1C36C002984D1 /* DMePubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1018D1C36C002984D1 /* DMePubManager.m */; };
+		23322D1818D1C7D3002984D1 /* DMTestableePubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1718D1C7D3002984D1 /* DMTestableePubManager.m */; };
 		239DEA7118B8CC4400ECF1DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7018B8CC4400ECF1DD /* Foundation.framework */; };
 		239DEA7318B8CC4400ECF1DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */; };
 		239DEA7518B8CC4400ECF1DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7418B8CC4400ECF1DD /* UIKit.framework */; };
@@ -75,6 +79,11 @@
 /* Begin PBXFileReference section */
 		2325215E18BE86C30076DA00 /* NSError+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Description.h"; sourceTree = "<group>"; };
 		2325215F18BE86C30076DA00 /* NSError+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Description.m"; sourceTree = "<group>"; };
+		23322D0D18D1BBD7002984D1 /* DMePubManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMePubManagerTests.m; sourceTree = "<group>"; };
+		23322D0F18D1C36C002984D1 /* DMePubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMePubManager.h; path = ePub/DMePubManager.h; sourceTree = "<group>"; };
+		23322D1018D1C36C002984D1 /* DMePubManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMePubManager.m; path = ePub/DMePubManager.m; sourceTree = "<group>"; };
+		23322D1618D1C7D3002984D1 /* DMTestableePubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMTestableePubManager.h; path = TestableObjects/DMTestableePubManager.h; sourceTree = "<group>"; };
+		23322D1718D1C7D3002984D1 /* DMTestableePubManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMTestableePubManager.m; path = TestableObjects/DMTestableePubManager.m; sourceTree = "<group>"; };
 		239DEA6D18B8CC4400ECF1DD /* SimpleEpubReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleEpubReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DEA7018B8CC4400ECF1DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -246,6 +255,7 @@
 				23A72B7F18C50F5A00B5B7B8 /* DMContainerTests.m */,
 				23A8039B18C913440038604A /* DMContainerFileTests.m */,
 				23A435F718CF98E60060754D /* DMTableOfContentsTests.m */,
+				23322D0D18D1BBD7002984D1 /* DMePubManagerTests.m */,
 			);
 			path = SimpleEpubReaderTests;
 			sourceTree = "<group>";
@@ -296,6 +306,8 @@
 		23F189F718BBE74800EC3B92 /* TestableObjects */ = {
 			isa = PBXGroup;
 			children = (
+				23322D1618D1C7D3002984D1 /* DMTestableePubManager.h */,
+				23322D1718D1C7D3002984D1 /* DMTestableePubManager.m */,
 				23F189F418BBE73600EC3B92 /* DMTestableArchive.h */,
 				23F189F518BBE73600EC3B92 /* DMTestableArchive.m */,
 				23F189FA18BBECBD00EC3B92 /* DMTestableePubFileManager.h */,
@@ -327,6 +339,8 @@
 				23A435FA18CF9A210060754D /* DMTableOfContents.m */,
 				23AEBB3F18CFB99E00018EF8 /* DMTableOfContentsItem.h */,
 				23AEBB4018CFB99E00018EF8 /* DMTableOfContentsItem.m */,
+				23322D0F18D1C36C002984D1 /* DMePubManager.h */,
+				23322D1018D1C36C002984D1 /* DMePubManager.m */,
 			);
 			name = ePub;
 			sourceTree = "<group>";
@@ -435,6 +449,7 @@
 				2325216018BE86C30076DA00 /* NSError+Description.m in Sources */,
 				23A803A318C91DA80038604A /* DDXMLNode+ChildForName.m in Sources */,
 				239DEA8118B8CC4400ECF1DD /* DMAppDelegate.m in Sources */,
+				23322D1118D1C36C002984D1 /* DMePubManager.m in Sources */,
 				23A435F518CBBA5C0060754D /* DMContainerItem.m in Sources */,
 				23A435ED18CB9DFB0060754D /* DMePubItem.m in Sources */,
 				23A72B9D18C5229B00B5B7B8 /* DDXMLNode.m in Sources */,
@@ -460,14 +475,17 @@
 				23A803A018C914DD0038604A /* DMContainerFileParser.m in Sources */,
 				23A8039C18C913440038604A /* DMContainerFileTests.m in Sources */,
 				2325216118BE86C30076DA00 /* NSError+Description.m in Sources */,
+				23322D1818D1C7D3002984D1 /* DMTestableePubManager.m in Sources */,
 				23A72B9E18C5229B00B5B7B8 /* DDXMLNode.m in Sources */,
 				23A435F818CF98E60060754D /* DMTableOfContentsTests.m in Sources */,
+				23322D1218D1C36C002984D1 /* DMePubManager.m in Sources */,
 				23A72B8618C5187B00B5B7B8 /* ZZArchiveEntry+TestableContainer.m in Sources */,
 				23F18A0118BBEE4000EC3B92 /* DMePubFileManager.m in Sources */,
 				23A72BA218C5241500B5B7B8 /* DMRootFileParser.m in Sources */,
 				23A72B8918C51DE600B5B7B8 /* DMTestableContainerePubFileManager.m in Sources */,
 				23F189FC18BBECBD00EC3B92 /* DMTestableePubFileManager.m in Sources */,
 				23A72B9C18C5229B00B5B7B8 /* DDXMLElement.m in Sources */,
+				23322D0E18D1BBD7002984D1 /* DMePubManagerTests.m in Sources */,
 				23F189F918BBE7A200EC3B92 /* DMUnZipTests.m in Sources */,
 				23A72B8018C50F5A00B5B7B8 /* DMContainerTests.m in Sources */,
 				23A435F218CBAC990060754D /* DMSpineItem.m in Sources */,

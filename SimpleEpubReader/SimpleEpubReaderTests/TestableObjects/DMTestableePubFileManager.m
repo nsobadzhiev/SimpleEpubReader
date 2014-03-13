@@ -35,7 +35,28 @@
 - (NSData*)dataForZipEntry:(ZZArchiveEntry*)entry
                      error:(NSError**)error
 {
-    return [entry newDataWithError:error];
+    if (self.hardcodedZipData != nil)
+    {
+        return self.hardcodedZipData;
+    }
+    else
+    {
+        return [entry newDataWithError:error];
+    }
+}
+
+- (NSData*)contentXmlWithName:zipContentsName
+                        error:(NSError**)error
+{
+    if (self.hardcodedZipData != nil)
+    {
+        return self.hardcodedZipData;
+    }
+    else
+    {
+        return [super contentXmlWithName:zipContentsName
+                                   error:error];
+    }
 }
 
 @end

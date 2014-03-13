@@ -13,6 +13,7 @@
 @interface DMTestableePubFileManager : DMePubFileManager
 
 @property (nonatomic) ZZArchive* archiver;
+@property (nonatomic, strong) NSData* hardcodedZipData;
 
 - (id)initWithArchiverClass:(Class)archiveClass;
 - (ZZArchive*)zipArchiver;
