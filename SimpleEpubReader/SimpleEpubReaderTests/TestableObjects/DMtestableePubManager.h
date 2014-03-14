@@ -13,5 +13,6 @@
 
 @property (nonatomic, strong) DMePubFileManager* fileManager;
 @property (nonatomic, strong) DMRootFileParser* rootParser;
+@property (nonatomic, strong) DMContainerFileParser* contentsXmlParser;
 
 @end

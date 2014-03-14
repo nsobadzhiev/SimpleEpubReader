@@ -30,4 +30,14 @@
     rootFileParser = rootParser;
 }
 
+- (DMContainerFileParser*)contentsXmlParser
+{
+    return contentsParser;
+}
+
+- (void)setContentsXmlParser:(DMContainerFileParser*)newParser
+{
+    contentsParser = newParser;
+}
+
 @end
