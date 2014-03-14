@@ -12,6 +12,7 @@
 
 - (DMRootFileParser*)rootFileParser;
 - (DMContainerFileParser*)contentsParser;
+- (DMTableOfContents*)nagivationParser;
 
 @end
 
@@ -60,6 +61,24 @@
 {
     DMContainerFileParser* contents = [self contentsParser];
     return [contents navigationItem];
+}
+
+- (NSString*)navigationTitle
+{
+    DMTableOfContents* navParser = [self nagivationParser];
+    return [navParser title];
+}
+
+- (NSArray*)navigationTopLevelItems
+{
+    DMTableOfContents* navParser = [self nagivationParser];
+    return [navParser topLevelItems];
+}
+
+- (NSArray*)allNavigationItems
+{
+    DMTableOfContents* navParser = [self nagivationParser];
+    return [navParser allItems];
 }
 
 - (NSData*)rootFileDataWithError:(NSError**)error;
@@ -120,6 +139,24 @@
         contentsParser = [[DMContainerFileParser alloc] initWithData:contentsData];
     }
     return contentsParser;
+}
+
+- (DMTableOfContents*)nagivationParser
+{
+    if (navigationParser == nil)
+    {
+        NSError* navFileError = nil;
+        DMePubItem* navItem = [self navigationItem];
+        NSData* contentsData = [self dataForFileAtPath:navItem.href
+                                                 error:&navFileError];
+        if (navFileError != nil)
+        {
+            NSLog(@"Failed to retrieve container.xml: %@", navFileError.localizedDescription);
+            return nil;
+        }
+        navigationParser = [[DMTableOfContents alloc] initWithData:contentsData];
+    }
+    return navigationParser;
 }
 
 @end

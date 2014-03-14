@@ -40,4 +40,14 @@
     contentsParser = newParser;
 }
 
+- (DMTableOfContents*)navParser
+{
+    return navigationParser;
+}
+
+- (void)setNavParser:(DMTableOfContents*)navParser
+{
+    navigationParser = navParser;
+}
+
 @end
