@@ -14,6 +14,10 @@
 		23322D1118D1C36C002984D1 /* DMePubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1018D1C36C002984D1 /* DMePubManager.m */; };
 		23322D1218D1C36C002984D1 /* DMePubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1018D1C36C002984D1 /* DMePubManager.m */; };
 		23322D1818D1C7D3002984D1 /* DMTestableePubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1718D1C7D3002984D1 /* DMTestableePubManager.m */; };
+		23322D1A18D34A94002984D1 /* DMTableOfContentsDataSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1918D34A94002984D1 /* DMTableOfContentsDataSourceTests.m */; };
+		23322D1D18D34BFF002984D1 /* DMTableOfContentsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1C18D34BFF002984D1 /* DMTableOfContentsDataSource.m */; };
+		23322D1E18D34BFF002984D1 /* DMTableOfContentsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1C18D34BFF002984D1 /* DMTableOfContentsDataSource.m */; };
+		23322D2118D34D61002984D1 /* DMTestableTableOfContentsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D2018D34D61002984D1 /* DMTestableTableOfContentsDataSource.m */; };
 		239DEA7118B8CC4400ECF1DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7018B8CC4400ECF1DD /* Foundation.framework */; };
 		239DEA7318B8CC4400ECF1DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */; };
 		239DEA7518B8CC4400ECF1DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7418B8CC4400ECF1DD /* UIKit.framework */; };
@@ -84,6 +88,11 @@
 		23322D1018D1C36C002984D1 /* DMePubManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMePubManager.m; path = ePub/DMePubManager.m; sourceTree = "<group>"; };
 		23322D1618D1C7D3002984D1 /* DMTestableePubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMTestableePubManager.h; path = TestableObjects/DMTestableePubManager.h; sourceTree = "<group>"; };
 		23322D1718D1C7D3002984D1 /* DMTestableePubManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMTestableePubManager.m; path = TestableObjects/DMTestableePubManager.m; sourceTree = "<group>"; };
+		23322D1918D34A94002984D1 /* DMTableOfContentsDataSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMTableOfContentsDataSourceTests.m; sourceTree = "<group>"; };
+		23322D1B18D34BFF002984D1 /* DMTableOfContentsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMTableOfContentsDataSource.h; path = UI/DMTableOfContentsDataSource.h; sourceTree = "<group>"; };
+		23322D1C18D34BFF002984D1 /* DMTableOfContentsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMTableOfContentsDataSource.m; path = UI/DMTableOfContentsDataSource.m; sourceTree = "<group>"; };
+		23322D1F18D34D61002984D1 /* DMTestableTableOfContentsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMTestableTableOfContentsDataSource.h; path = TestableObjects/DMTestableTableOfContentsDataSource.h; sourceTree = "<group>"; };
+		23322D2018D34D61002984D1 /* DMTestableTableOfContentsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMTestableTableOfContentsDataSource.m; path = TestableObjects/DMTestableTableOfContentsDataSource.m; sourceTree = "<group>"; };
 		239DEA6D18B8CC4400ECF1DD /* SimpleEpubReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleEpubReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DEA7018B8CC4400ECF1DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -230,6 +239,8 @@
 				239DEA8018B8CC4400ECF1DD /* DMAppDelegate.m */,
 				239DEA8218B8CC4400ECF1DD /* Images.xcassets */,
 				239DEA7718B8CC4400ECF1DD /* Supporting Files */,
+				23322D1B18D34BFF002984D1 /* DMTableOfContentsDataSource.h */,
+				23322D1C18D34BFF002984D1 /* DMTableOfContentsDataSource.m */,
 			);
 			path = SimpleEpubReader;
 			sourceTree = "<group>";
@@ -256,6 +267,7 @@
 				23A8039B18C913440038604A /* DMContainerFileTests.m */,
 				23A435F718CF98E60060754D /* DMTableOfContentsTests.m */,
 				23322D0D18D1BBD7002984D1 /* DMePubManagerTests.m */,
+				23322D1918D34A94002984D1 /* DMTableOfContentsDataSourceTests.m */,
 			);
 			path = SimpleEpubReaderTests;
 			sourceTree = "<group>";
@@ -316,6 +328,8 @@
 				23A72B8518C5187B00B5B7B8 /* ZZArchiveEntry+TestableContainer.m */,
 				23A72B8718C51DE600B5B7B8 /* DMTestableContainerePubFileManager.h */,
 				23A72B8818C51DE600B5B7B8 /* DMTestableContainerePubFileManager.m */,
+				23322D1F18D34D61002984D1 /* DMTestableTableOfContentsDataSource.h */,
+				23322D2018D34D61002984D1 /* DMTestableTableOfContentsDataSource.m */,
 			);
 			name = TestableObjects;
 			sourceTree = "<group>";
@@ -458,6 +472,7 @@
 				23AEBB4118CFB99E00018EF8 /* DMTableOfContentsItem.m in Sources */,
 				23A72B9718C5229B00B5B7B8 /* NSString+DDXML.m in Sources */,
 				23A8039F18C914DD0038604A /* DMContainerFileParser.m in Sources */,
+				23322D1D18D34BFF002984D1 /* DMTableOfContentsDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				239DEA9618B8CC4500ECF1DD /* SimpleEpubReaderTests.m in Sources */,
+				23322D2118D34D61002984D1 /* DMTestableTableOfContentsDataSource.m in Sources */,
 				23A435EE18CB9DFB0060754D /* DMePubItem.m in Sources */,
 				23A435FC18CF9A210060754D /* DMTableOfContents.m in Sources */,
 				23A72B9A18C5229B00B5B7B8 /* DDXMLDocument.m in Sources */,
@@ -476,12 +492,14 @@
 				23A8039C18C913440038604A /* DMContainerFileTests.m in Sources */,
 				2325216118BE86C30076DA00 /* NSError+Description.m in Sources */,
 				23322D1818D1C7D3002984D1 /* DMTestableePubManager.m in Sources */,
+				23322D1E18D34BFF002984D1 /* DMTableOfContentsDataSource.m in Sources */,
 				23A72B9E18C5229B00B5B7B8 /* DDXMLNode.m in Sources */,
 				23A435F818CF98E60060754D /* DMTableOfContentsTests.m in Sources */,
 				23322D1218D1C36C002984D1 /* DMePubManager.m in Sources */,
 				23A72B8618C5187B00B5B7B8 /* ZZArchiveEntry+TestableContainer.m in Sources */,
 				23F18A0118BBEE4000EC3B92 /* DMePubFileManager.m in Sources */,
 				23A72BA218C5241500B5B7B8 /* DMRootFileParser.m in Sources */,
+				23322D1A18D34A94002984D1 /* DMTableOfContentsDataSourceTests.m in Sources */,
 				23A72B8918C51DE600B5B7B8 /* DMTestableContainerePubFileManager.m in Sources */,
 				23F189FC18BBECBD00EC3B92 /* DMTestableePubFileManager.m in Sources */,
 				23A72B9C18C5229B00B5B7B8 /* DDXMLElement.m in Sources */,
