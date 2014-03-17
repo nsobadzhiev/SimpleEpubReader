@@ -56,6 +56,20 @@
     return 1;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray* tocItems = [epubManager allNavigationItems];
+    DMTableOfContentsItem* tocItem = [tocItems objectAtIndex:indexPath.row];
+    if (tocItem.path.length > 0)
+    {
+        if ([self.delegate respondsToSelector:@selector(tableOfContentsDataSource:didSelectFilePath:)])
+        {
+            [self.delegate tableOfContentsDataSource:self
+                                   didSelectFilePath:tocItem.path];
+        }
+    }
+}
+
 #pragma mark PrivateMethods
 
 - (DMePubManager*)createEpubManagerWithPath:(NSString*)path
