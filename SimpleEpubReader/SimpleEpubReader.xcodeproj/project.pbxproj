@@ -12,6 +12,9 @@
 		2325216118BE86C30076DA00 /* NSError+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 2325215F18BE86C30076DA00 /* NSError+Description.m */; };
 		2329FA4918D78E070068488A /* DMHtmlPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2329FA4818D78E070068488A /* DMHtmlPageViewController.xib */; };
 		2329FA4A18D78E070068488A /* DMHtmlPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2329FA4818D78E070068488A /* DMHtmlPageViewController.xib */; };
+		2329FA4C18D79EBA0068488A /* DMePubItemIteratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2329FA4B18D79EBA0068488A /* DMePubItemIteratorTests.m */; };
+		2329FA4F18D79FCE0068488A /* DMePubItemIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2329FA4E18D79FCE0068488A /* DMePubItemIterator.m */; };
+		2329FA5018D79FCE0068488A /* DMePubItemIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2329FA4E18D79FCE0068488A /* DMePubItemIterator.m */; };
 		23322D0E18D1BBD7002984D1 /* DMePubManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D0D18D1BBD7002984D1 /* DMePubManagerTests.m */; };
 		23322D1118D1C36C002984D1 /* DMePubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1018D1C36C002984D1 /* DMePubManager.m */; };
 		23322D1218D1C36C002984D1 /* DMePubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D1018D1C36C002984D1 /* DMePubManager.m */; };
@@ -92,6 +95,9 @@
 		2325215E18BE86C30076DA00 /* NSError+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Description.h"; sourceTree = "<group>"; };
 		2325215F18BE86C30076DA00 /* NSError+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Description.m"; sourceTree = "<group>"; };
 		2329FA4818D78E070068488A /* DMHtmlPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DMHtmlPageViewController.xib; sourceTree = "<group>"; };
+		2329FA4B18D79EBA0068488A /* DMePubItemIteratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMePubItemIteratorTests.m; sourceTree = "<group>"; };
+		2329FA4D18D79FCE0068488A /* DMePubItemIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMePubItemIterator.h; path = ePub/DMePubItemIterator.h; sourceTree = "<group>"; };
+		2329FA4E18D79FCE0068488A /* DMePubItemIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMePubItemIterator.m; path = ePub/DMePubItemIterator.m; sourceTree = "<group>"; };
 		23322D0D18D1BBD7002984D1 /* DMePubManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMePubManagerTests.m; sourceTree = "<group>"; };
 		23322D0F18D1C36C002984D1 /* DMePubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMePubManager.h; path = ePub/DMePubManager.h; sourceTree = "<group>"; };
 		23322D1018D1C36C002984D1 /* DMePubManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMePubManager.m; path = ePub/DMePubManager.m; sourceTree = "<group>"; };
@@ -300,6 +306,7 @@
 				23322D2218D64C95002984D1 /* DMTableOfContentsTableViewControllerTests.m */,
 				23322D2C18D77A65002984D1 /* DMTableOfContentsDelegateTests.m */,
 				23322D2E18D78361002984D1 /* DMHtmlPageViewControllerTests.m */,
+				2329FA4B18D79EBA0068488A /* DMePubItemIteratorTests.m */,
 			);
 			path = SimpleEpubReaderTests;
 			sourceTree = "<group>";
@@ -387,6 +394,8 @@
 				23AEBB4018CFB99E00018EF8 /* DMTableOfContentsItem.m */,
 				23322D0F18D1C36C002984D1 /* DMePubManager.h */,
 				23322D1018D1C36C002984D1 /* DMePubManager.m */,
+				2329FA4D18D79FCE0068488A /* DMePubItemIterator.h */,
+				2329FA4E18D79FCE0068488A /* DMePubItemIterator.m */,
 			);
 			name = ePub;
 			sourceTree = "<group>";
@@ -506,6 +515,7 @@
 				23A72B9D18C5229B00B5B7B8 /* DDXMLNode.m in Sources */,
 				23A72B9918C5229B00B5B7B8 /* DDXMLDocument.m in Sources */,
 				23A435F118CBAC990060754D /* DMSpineItem.m in Sources */,
+				2329FA4F18D79FCE0068488A /* DMePubItemIterator.m in Sources */,
 				23AEBB4118CFB99E00018EF8 /* DMTableOfContentsItem.m in Sources */,
 				23A72B9718C5229B00B5B7B8 /* NSString+DDXML.m in Sources */,
 				23A8039F18C914DD0038604A /* DMContainerFileParser.m in Sources */,
@@ -526,6 +536,7 @@
 				23AEBB4218CFB99E00018EF8 /* DMTableOfContentsItem.m in Sources */,
 				23A803A018C914DD0038604A /* DMContainerFileParser.m in Sources */,
 				23A8039C18C913440038604A /* DMContainerFileTests.m in Sources */,
+				2329FA5018D79FCE0068488A /* DMePubItemIterator.m in Sources */,
 				23322D2318D64C95002984D1 /* DMTableOfContentsTableViewControllerTests.m in Sources */,
 				23322D2D18D77A66002984D1 /* DMTableOfContentsDelegateTests.m in Sources */,
 				2325216118BE86C30076DA00 /* NSError+Description.m in Sources */,
@@ -543,6 +554,7 @@
 				23A72B9C18C5229B00B5B7B8 /* DDXMLElement.m in Sources */,
 				23322D0E18D1BBD7002984D1 /* DMePubManagerTests.m in Sources */,
 				23322D2B18D64D97002984D1 /* DMTableOfContentsTableViewController.m in Sources */,
+				2329FA4C18D79EBA0068488A /* DMePubItemIteratorTests.m in Sources */,
 				23F189F918BBE7A200EC3B92 /* DMUnZipTests.m in Sources */,
 				23322D3318D7847F002984D1 /* DMHtmlPageViewController.m in Sources */,
 				23A72B8018C50F5A00B5B7B8 /* DMContainerTests.m in Sources */,
