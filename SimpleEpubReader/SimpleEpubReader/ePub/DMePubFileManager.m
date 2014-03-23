@@ -48,9 +48,12 @@ static NSString* const k_containerXmlFileName = @"/META-INF/container.xml";
             return [zipEntry newDataWithError:error];
         }
     }
-    *error = [NSError errorWithCode:1
-                             domain:@"ePub read error"
-                        description:@"No contents XML in ePub"];
+    if (error != nil)
+    {
+        *error = [NSError errorWithCode:1
+                                 domain:@"ePub read error"
+                            description:@"No contents XML in ePub"];
+    }
     return nil;
 }
 

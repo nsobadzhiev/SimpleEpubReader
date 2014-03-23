@@ -23,5 +23,6 @@
 
 - (BOOL)goToItemWithPath:(NSString*)path;
 - (DMePubItem*)previousItem;
+- (DMePubItem*)currentItem;
 
 @end

@@ -67,4 +67,14 @@
     return [epubManager epubItemForSpineElement:currentSpineItem];
 }
 
+- (DMePubItem*)currentItem
+{
+    if (currentSpineItemIndex < 0)
+    {
+        return nil;
+    }
+    DMSpineItem* currentSpineItem = [[epubManager spineItems] objectAtIndex:currentSpineItemIndex];
+    return [epubManager epubItemForSpineElement:currentSpineItem];
+}
+
 @end
