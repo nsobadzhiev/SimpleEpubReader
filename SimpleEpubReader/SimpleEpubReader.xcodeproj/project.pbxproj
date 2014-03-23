@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		23022E9318C52B7E00DF1C65 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A72BA318C52A3A00B5B7B8 /* libxml2.dylib */; };
+		2324989518DEF0E900330ACA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2324989418DEF0E900330ACA /* Main.storyboard */; };
+		2324989618DEF0E900330ACA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2324989418DEF0E900330ACA /* Main.storyboard */; };
 		2325216018BE86C30076DA00 /* NSError+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 2325215F18BE86C30076DA00 /* NSError+Description.m */; };
 		2325216118BE86C30076DA00 /* NSError+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 2325215F18BE86C30076DA00 /* NSError+Description.m */; };
 		2329FA4918D78E070068488A /* DMHtmlPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2329FA4818D78E070068488A /* DMHtmlPageViewController.xib */; };
@@ -98,6 +100,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2324989418DEF0E900330ACA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2325215E18BE86C30076DA00 /* NSError+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Description.h"; sourceTree = "<group>"; };
 		2325215F18BE86C30076DA00 /* NSError+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Description.m"; sourceTree = "<group>"; };
 		2329FA4818D78E070068488A /* DMHtmlPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DMHtmlPageViewController.xib; sourceTree = "<group>"; };
@@ -243,6 +246,7 @@
 				237DAEB718DA3705003C0A3E /* DMePubPageViewController.m */,
 				237DAEBC18DA4242003C0A3E /* DMePubItemViewController.h */,
 				237DAEBD18DA4242003C0A3E /* DMePubItemViewController.m */,
+				2324989418DEF0E900330ACA /* Main.storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -495,6 +499,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				239DEA7B18B8CC4400ECF1DD /* InfoPlist.strings in Resources */,
+				2324989518DEF0E900330ACA /* Main.storyboard in Resources */,
 				2329FA4918D78E070068488A /* DMHtmlPageViewController.xib in Resources */,
 				239DEA8318B8CC4400ECF1DD /* Images.xcassets in Resources */,
 			);
@@ -506,6 +511,7 @@
 			files = (
 				239DEA9418B8CC4500ECF1DD /* InfoPlist.strings in Resources */,
 				2329FA4A18D78E070068488A /* DMHtmlPageViewController.xib in Resources */,
+				2324989618DEF0E900330ACA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
