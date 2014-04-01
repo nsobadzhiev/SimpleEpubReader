@@ -10,6 +10,7 @@
 #import "DMePubPageViewController.h"
 #import "DMTestableePubManager.h"
 #import "DMePubItemViewController.h"
+#import "DMTestableePubPageViewController.h"
 
 @interface DMePubPageViewControllerTests : XCTestCase
 {
@@ -114,6 +115,33 @@
                                                                           viewControllerBeforeViewController:itemController];
     DMePubItem* nextItem = nextController.epubItem;
     XCTAssertEqualObjects(nextItem.itemID, @"1", @"DMePubPageViewController should return a view controller containing the previous epub item");
+}
+
+- (void)testEpubPageViewControllerChangesIteratorsWhenChangingEpubManagers
+{
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:nil];
+    DMTestableePubPageViewController* epubPageController = [[DMTestableePubPageViewController alloc] initWithEpubManager:epubManager];
+    DMePubItemIterator* firstIterator = epubPageController.iterator;
+    epubManager = [[DMTestableePubManager alloc] initWithEpubPath:nil];
+    epubPageController.epubManager = epubManager;
+    DMePubItemIterator* secondIterator = epubPageController.iterator;
+    XCTAssertNotEqual(firstIterator, secondIterator, @"DMePubPageViewController should create a new iterator every time it changes it's epub manager");
+}
+
+- (void)testEpubPageViewControllerAddsPageControllerAsSubview
+{
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:nil];
+    pageController = [[DMePubPageViewController alloc] initWithEpubManager:epubManager];
+    [pageController view];    // force it to load it's view
+    XCTAssert([pageController.view.subviews containsObject:pageController.pageViewController.view], @"DMePubPageViewController should add a UIPageViewController's view as subview");
+}
+
+- (void)testEpubPageViewControllerPopulatesPageController
+{
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:nil];
+    pageController = [[DMePubPageViewController alloc] initWithEpubManager:epubManager];
+    [pageController view];    // force it to load it's view
+    XCTAssert(pageController.pageViewController.viewControllers.count != 0, @"DMePubPageViewController should populate it's UIPageViewController with screens");
 }
 
 @end

@@ -25,6 +25,7 @@
 		2329FA4C18D79EBA0068488A /* DMePubItemIteratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2329FA4B18D79EBA0068488A /* DMePubItemIteratorTests.m */; };
 		2329FA4F18D79FCE0068488A /* DMePubItemIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2329FA4E18D79FCE0068488A /* DMePubItemIterator.m */; };
 		2329FA5018D79FCE0068488A /* DMePubItemIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2329FA4E18D79FCE0068488A /* DMePubItemIterator.m */; };
+		232FC58718EB63F4009E5EBB /* DMTestableePubPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232FC58618EB63F4009E5EBB /* DMTestableePubPageViewController.m */; };
 		23315F2F18E0D92800BEA595 /* libzipzap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23F18A0218BBF93600EC3B92 /* libzipzap.a */; };
 		23315F3118E0DD2500BEA595 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23315F3018E0DD2500BEA595 /* libc++.dylib */; };
 		23322D0E18D1BBD7002984D1 /* DMePubManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23322D0D18D1BBD7002984D1 /* DMePubManagerTests.m */; };
@@ -128,6 +129,8 @@
 		2329FA4B18D79EBA0068488A /* DMePubItemIteratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMePubItemIteratorTests.m; sourceTree = "<group>"; };
 		2329FA4D18D79FCE0068488A /* DMePubItemIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMePubItemIterator.h; path = ePub/DMePubItemIterator.h; sourceTree = "<group>"; };
 		2329FA4E18D79FCE0068488A /* DMePubItemIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMePubItemIterator.m; path = ePub/DMePubItemIterator.m; sourceTree = "<group>"; };
+		232FC58518EB63F4009E5EBB /* DMTestableePubPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMTestableePubPageViewController.h; path = TestableObjects/DMTestableePubPageViewController.h; sourceTree = "<group>"; };
+		232FC58618EB63F4009E5EBB /* DMTestableePubPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMTestableePubPageViewController.m; path = TestableObjects/DMTestableePubPageViewController.m; sourceTree = "<group>"; };
 		23315F3018E0DD2500BEA595 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		23322D0D18D1BBD7002984D1 /* DMePubManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMePubManagerTests.m; sourceTree = "<group>"; };
 		23322D0F18D1C36C002984D1 /* DMePubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMePubManager.h; path = ePub/DMePubManager.h; sourceTree = "<group>"; };
@@ -435,6 +438,8 @@
 				232498A518DF5E7A00330ACA /* DMTestableDocumentsFileManager.m */,
 				232498A818DF79C200330ACA /* DMTestableFileSystemManager.h */,
 				232498A918DF79C200330ACA /* DMTestableFileSystemManager.m */,
+				232FC58518EB63F4009E5EBB /* DMTestableePubPageViewController.h */,
+				232FC58618EB63F4009E5EBB /* DMTestableePubPageViewController.m */,
 			);
 			name = TestableObjects;
 			sourceTree = "<group>";
@@ -602,6 +607,7 @@
 				23322D2118D34D61002984D1 /* DMTestableTableOfContentsDataSource.m in Sources */,
 				23A435EE18CB9DFB0060754D /* DMePubItem.m in Sources */,
 				23A435FC18CF9A210060754D /* DMTableOfContents.m in Sources */,
+				232FC58718EB63F4009E5EBB /* DMTestableePubPageViewController.m in Sources */,
 				23A72B9A18C5229B00B5B7B8 /* DDXMLDocument.m in Sources */,
 				23A803A418C91DA80038604A /* DDXMLNode+ChildForName.m in Sources */,
 				23F189F618BBE73600EC3B92 /* DMTestableArchive.m in Sources */,

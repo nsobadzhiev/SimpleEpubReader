@@ -14,6 +14,7 @@
 @property (nonatomic, strong) id<DMFileSystemManager> fileSystemManager;
 
 - (NSArray*)allDocuments;
+- (NSArray*)allDocumentPaths;
 - (NSData*)contentsOfFile:(NSString*)filePath;
 
 @end

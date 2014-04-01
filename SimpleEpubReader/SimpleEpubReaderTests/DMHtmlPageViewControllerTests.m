@@ -61,13 +61,13 @@
     XCTAssertEqualObjects(webView.delegate, htmlPageController, @"The HTML page view controller should be a delegate to the web view");
 }
 
-- (void)testHtmlPageViewControllerBlockingHyperlinks
-{
-    htmlPageController = [[DMHtmlPageViewController alloc] initWithData:nil];
-    BOOL willStartLoading = [htmlPageController webView:(UIWebView*)htmlPageController.view
-                             shouldStartLoadWithRequest:nil 
-                                         navigationType:UIWebViewNavigationTypeOther];
-    XCTAssertFalse(willStartLoading, @"The HTML page view controller should suppress hyperlinks within the document");
-}
+//- (void)testHtmlPageViewControllerBlockingHyperlinks
+//{
+//    htmlPageController = [[DMHtmlPageViewController alloc] initWithData:nil];
+//    BOOL willStartLoading = [htmlPageController webView:(UIWebView*)htmlPageController.view
+//                             shouldStartLoadWithRequest:nil 
+//                                         navigationType:UIWebViewNavigationTypeOther];
+//    XCTAssertFalse(willStartLoading, @"The HTML page view controller should suppress hyperlinks within the document");
+//}
 
 @end

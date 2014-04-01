@@ -29,6 +29,21 @@
                                                        error:nil];
 }
 
+- (NSArray*)allDocumentPaths
+{
+    NSArray* allFileNames = [self allDocuments];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+														 NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSMutableArray* allPaths = [NSMutableArray arrayWithCapacity:allFileNames.count];
+    for (NSString* fileName in allFileNames)
+    {
+        NSString* filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+        [allPaths addObject:filePath];
+    }
+    return [NSArray arrayWithArray:allPaths];
+}
+
 - (NSData*)contentsOfFile:(NSString*)filePath
 {
     return [self.fileSystemManager contentsAtPath:filePath];

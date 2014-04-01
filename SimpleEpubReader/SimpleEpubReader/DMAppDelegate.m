@@ -12,6 +12,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Uncomment for testing (loading epub files for the app bundle)
+//    NSString* epubPath = [[NSBundle mainBundle] pathForResource:@"accessible_epub_3-20121024" ofType:@"epub"];
+//    NSData* epubData = [NSData dataWithContentsOfFile:epubPath];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+//														 NSUserDomainMask, YES);
+//	NSString* documentsDirectory = [paths objectAtIndex:0];
+//    NSString* epubDocsPath = [documentsDirectory stringByAppendingPathComponent:@"testEpub.epub"];
+//    [epubData writeToFile:epubDocsPath atomically:YES];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];

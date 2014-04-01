@@ -35,9 +35,9 @@
     [super viewDidLoad];
     UIWebView* webView = (UIWebView*)self.view;
     [webView loadData:htmlData
-             MIMEType:nil
+             MIMEType:@"application/xhtml+xml"
      textEncodingName:@"utf-8"
-              baseURL:nil];
+              baseURL:[NSURL URLWithString:@"file:///epub/"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,7 +52,9 @@
 shouldStartLoadWithRequest:(NSURLRequest *)request 
  navigationType:(UIWebViewNavigationType)navigationType
 {
-    return NO;
+    // TODO: if it is a request for external resource,
+    // open it outside the book (maybe in safari)
+    return YES;
 }
 
 @end

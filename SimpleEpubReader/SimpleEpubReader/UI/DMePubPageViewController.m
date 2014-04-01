@@ -22,7 +22,6 @@
     if (self)
     {
         self.epubManager = epubManager;
-        itemIterator = [[DMePubItemIterator alloc] initWithEpubManager:self.epubManager];
     }
     return self;
 }
@@ -33,12 +32,27 @@
     return self;
 }
 
+- (void)setEpubManager:(DMePubManager *)epubManager
+{
+    if (self.epubManager != epubManager)
+    {
+        _epubManager = epubManager;
+        itemIterator = [[DMePubItemIterator alloc] initWithEpubManager:self.epubManager];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
                                                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                             options:nil];
+    [self.pageViewController setViewControllers:@[[DMePubItemViewController new]]
+                                      direction:UIPageViewControllerNavigationDirectionForward 
+                                       animated:YES 
+                                     completion:nil];
+    self.pageViewController.dataSource = self;
+    [self.view addSubview:self.pageViewController.view];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,7 +86,8 @@
     DMePubItem* currentItem = [itemIterator currentItem];
     DMePubItem* viewControllerItem = [currentController epubItem];
     
-    if ([viewControllerItem isEqual:currentItem] == NO)
+    if (viewControllerItem != nil &&
+        [viewControllerItem isEqual:currentItem] == NO)
     {
         [itemIterator goToItemWithPath:viewControllerItem.href];
     }

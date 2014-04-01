@@ -38,7 +38,7 @@
 {
     NSError* zipError = nil;
     NSData* containerData = nil;
-    NSString* zipContentsName = @"/META-INF/container.xml";
+    NSString* zipContentsName = @"META-INF/container.xml";
     epubManager = [[DMTestableContainerePubFileManager alloc] initWithArchiverClass:[DMTestableArchive class]];
     DMTestableArchive* archiver = (DMTestableArchive*)epubManager.archiver;
     ZZArchiveEntry* testEntry = [ZZArchiveEntry archiveEntryWithFileName:zipContentsName

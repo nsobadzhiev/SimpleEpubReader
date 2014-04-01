@@ -84,8 +84,8 @@
 - (NSData*)rootFileDataWithError:(NSError**)error;
 {
     NSString* rootFilePath = [self rootFilePath];
-    return [self dataForFileAtPath:rootFilePath
-                             error:error];
+    return [epubFileManager contentXmlWithName:rootFilePath
+                                         error:error];
 }
 
 - (NSString*)titleWithError:(NSError**)error
@@ -103,7 +103,10 @@
 - (NSData*)dataForFileAtPath:(NSString*)filePath
                        error:(NSError**)error
 {
-    return [epubFileManager contentXmlWithName:filePath
+    NSString* rootFilePath = [self rootFilePath];
+    NSString* rootFileDir = [rootFilePath stringByDeletingLastPathComponent];
+    NSString* absoluteFilePath = [rootFileDir stringByAppendingPathComponent:filePath];
+    return [epubFileManager contentXmlWithName:absoluteFilePath
                                          error:error];
 }
 

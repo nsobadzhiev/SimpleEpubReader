@@ -63,6 +63,20 @@
     XCTAssertEqualObjects(docFiles, files, @"Should be able to get all files inside the documents directory");
 }
 
+- (void)testListingAllFilePathsInTheDocumentsDirectory
+{
+    DMTestableFileSystemManager* fileSystemManager = [DMTestableFileSystemManager new];
+    NSArray* files = @[@"File1", @"File2", @"File3"];
+    fileSystemManager.directoryContents = files;
+    fileManager.fileSystemManager = fileSystemManager;
+    NSArray* docFiles = [fileManager allDocumentPaths];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+														 NSUserDomainMask, YES);
+	NSString* documentsDirectory = [paths objectAtIndex:0];
+    NSString* file1Path = [documentsDirectory stringByAppendingPathComponent:[files firstObject]];
+    XCTAssertEqualObjects([docFiles firstObject], file1Path, @"Should be able to get all file paths inside the documents directory");
+}
+
 - (void)testListingAllFilesInTheDocumentsDirectoryHasTheRightPath
 {
     DMTestableFileSystemManager* fileSystemManager = [DMTestableFileSystemManager new];
@@ -75,7 +89,7 @@
     XCTAssertEqualObjects(searchDir, documentsDirectory, @"Should be able to get all files inside the documents directory");
 }
 
-- (void)testReceivingTheCOntentsOfAFile
+- (void)testReceivingTheContentsOfAFile
 {
     DMTestableFileSystemManager* fileSystemManager = [DMTestableFileSystemManager new];
     NSData* fileContents = [@"test" dataUsingEncoding:NSUTF8StringEncoding];

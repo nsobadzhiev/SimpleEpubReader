@@ -9,7 +9,7 @@
 #import "DMePubFileManager.h"
 #import "NSError+Description.h"
 
-static NSString* const k_containerXmlFileName = @"/META-INF/container.xml";
+static NSString* const k_containerXmlFileName = @"META-INF/container.xml";
 
 @implementation DMePubFileManager
 
@@ -30,7 +30,8 @@ static NSString* const k_containerXmlFileName = @"/META-INF/container.xml";
     {
         if (filePath != nil)
         {
-            NSURL* fileUrl = [NSURL URLWithString:filePath];
+            NSURL* fileUrl = [[NSURL alloc] initFileURLWithPath:filePath
+                                                    isDirectory:NO];
             zipArchiver = [[ZZArchive alloc] initWithContentsOfURL:fileUrl
                                                            encoding:NSUTF8StringEncoding];
         }

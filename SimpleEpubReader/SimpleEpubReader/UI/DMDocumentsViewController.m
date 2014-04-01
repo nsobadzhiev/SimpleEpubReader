@@ -8,6 +8,8 @@
 
 #import "DMDocumentsViewController.h"
 #import "DMDocumentsFileManager.h"
+#import "DMePubPageViewController.h"
+#import "DMePubManager.h"
 
 @interface DMDocumentsViewController ()
 
@@ -18,6 +20,16 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
+    if (self) 
+    {
+        self.fileManager = [[DMDocumentsFileManager alloc] init];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
     if (self) 
     {
         self.fileManager = [[DMDocumentsFileManager alloc] init];
@@ -111,15 +123,22 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
+    if ([segue.identifier isEqualToString:@"OpenDocumentSegue"])
+    {
+        UITableViewCell* selectedCell = (UITableViewCell*)sender;
+        NSIndexPath* selectedIndexPath = [self.tableView indexPathForCell:selectedCell];
+        NSString* selectedFile = [[self.fileManager allDocumentPaths] objectAtIndex:selectedIndexPath.row];
+        DMePubPageViewController* newController = (DMePubPageViewController*)[segue destinationViewController];
+        newController.epubManager = [[DMePubManager alloc] initWithEpubPath:selectedFile];
+    }
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end
