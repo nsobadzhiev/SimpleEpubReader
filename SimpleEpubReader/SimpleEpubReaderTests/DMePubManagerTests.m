@@ -223,6 +223,26 @@
     XCTAssertEqualObjects([(DMTableOfContentsItem*)[tocItems lastObject] path], @"pr01s05.xhtml", @"%@ does not match the expected item path", [(DMTableOfContentsItem*)[tocItems lastObject] path]);
 }
 
+- (void)testIndicatingNoOpenFile
+{
+    epubManager = [[DMTestableePubManager alloc] initWithEpubPath:@"no/such/file"];
+    XCTAssertFalse(epubManager.isOpen, @"The isOpen property should indicate that no file has been open");
+}
+
+- (void)testIndicatingOpenFile
+{
+    DMTestableePubFileManager* epubFileManager = [[DMTestableePubFileManager alloc] initWithArchiverClass:[DMTestableArchive class]];
+    epubManager.fileManager = epubFileManager;
+    
+    DMTestableArchive* archiver = (DMTestableArchive*)epubFileManager.archiver;
+    NSString* zipContentsName = @"OEBPS/content.opf";
+    ZZArchiveEntry* testEntry = [ZZArchiveEntry archiveEntryWithFileName:zipContentsName
+                                                                compress:NO
+                                                             streamBlock:nil];
+    [archiver setFakeEntries:@[testEntry]];
+    XCTAssertTrue(epubManager.isOpen, @"The isOpen property should indicate that a file has been open");
+}
+
 #pragma mark Utility Methods
 
 - (void)setupEpubManagerForTestWithContentsXml:(NSString*)xml

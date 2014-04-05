@@ -8,6 +8,8 @@
 
 #import "DMTestableArchive.h"
 
+static NSString* expectedZipLocation = nil;
+
 @implementation DMTestableArchive
 
 - (id)initWithContentsOfURL:(NSURL*)URL
@@ -18,8 +20,15 @@
 	if (self)
 	{
 		self.wasAskedToOpenArchive = YES;
+        self.openedLocation = [URL path];
+        self.fakeEntries = [NSArray array];
 	}
 	return self;
+}
+
+- (void)setZipLocation:(NSString *)zipLocation
+{
+    expectedZipLocation = zipLocation;
 }
 
 - (void)setFakeEntries:(NSArray*)entries
@@ -29,7 +38,15 @@
 
 - (NSArray*)entries
 {
-    return fakeEntries;
+    if (expectedZipLocation == nil ||
+        [expectedZipLocation isEqualToString:self.openedLocation])
+    {
+        return fakeEntries;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 @end

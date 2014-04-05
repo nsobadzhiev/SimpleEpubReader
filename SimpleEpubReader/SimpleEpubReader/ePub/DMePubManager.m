@@ -33,6 +33,11 @@
     return [self initWithEpubPath:nil];
 }
 
+- (BOOL)isOpen
+{
+    return epubFileManager.fileOpen;
+}
+
 - (NSString*)rootFilePath
 {
     DMRootFileParser* rootParser = [self rootFileParser];

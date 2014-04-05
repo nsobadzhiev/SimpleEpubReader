@@ -20,6 +20,7 @@
     DMTableOfContents* navigationParser;
 }
 
+@property (nonatomic, readonly) BOOL isOpen;
 @property (nonatomic, readonly) NSString* rootFilePath;
 @property (nonatomic, readonly) NSArray* epubHtmlItems;
 @property (nonatomic, readonly) NSArray* spineItems;

@@ -30,13 +30,23 @@ static NSString* const k_containerXmlFileName = @"META-INF/container.xml";
     {
         if (filePath != nil)
         {
-            NSURL* fileUrl = [[NSURL alloc] initFileURLWithPath:filePath
-                                                    isDirectory:NO];
-            zipArchiver = [[ZZArchive alloc] initWithContentsOfURL:fileUrl
-                                                           encoding:NSUTF8StringEncoding];
+            [self openEpubWithPath:filePath];
         }
     }
     return self;
+}
+
+- (void)openEpubWithPath:(NSString*)path
+{
+    NSURL* fileUrl = [[NSURL alloc] initFileURLWithPath:path
+                                            isDirectory:NO];
+    Class zipClass = [zipArchiver class];
+    zipArchiver = [zipClass archiveWithContentsOfURL:fileUrl];
+}
+
+- (BOOL)fileOpen
+{
+    return (zipArchiver.entries != nil);
 }
 
 - (NSData*)contentXmlWithName:zipContentsName

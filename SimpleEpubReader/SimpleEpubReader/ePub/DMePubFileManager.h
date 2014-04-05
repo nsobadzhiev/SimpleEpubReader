@@ -14,8 +14,12 @@
     ZZArchive* zipArchiver;
 }
 
+@property (nonatomic, readonly) BOOL fileOpen;
+
 - (id)init;
 - (id)initWithEpubPath:(NSString*)filePath;
+
+- (void)openEpubWithPath:(NSString*)path;
 
 - (NSData*)contentXmlWithName:zipContentsName
                         error:(NSError**)error;

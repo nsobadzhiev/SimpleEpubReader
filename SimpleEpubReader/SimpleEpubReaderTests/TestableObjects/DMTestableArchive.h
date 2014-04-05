@@ -15,6 +15,11 @@
 
 @property (nonatomic) BOOL wasAskedToOpenArchive;
 
+// The testable zip archive will only return it's hardcoded entries provided
+// that it was created to the right zipLocation or the zipLocation is nil.
+@property (nonatomic, strong) NSString* zipLocation;
+@property (nonatomic, strong) NSString* openedLocation;
+
 - (void)setFakeEntries:(NSArray*)entries;
 
 @end
