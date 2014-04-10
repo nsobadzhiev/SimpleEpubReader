@@ -16,10 +16,12 @@
     DDXMLDocument* containerXml;
     
     NSArray* epubHtmlItems;
+    NSArray* epubItems;
     NSArray* spineItems;
 }
 
 @property (nonatomic, readonly) NSString* epubTitle;
+@property (nonatomic, readonly) NSArray* epubItems;
 @property (nonatomic, readonly) NSArray* epubHtmlItems;
 @property (nonatomic, readonly) NSArray* spineItems;
 @property (nonatomic, readonly) NSArray* filteredSpineItems;

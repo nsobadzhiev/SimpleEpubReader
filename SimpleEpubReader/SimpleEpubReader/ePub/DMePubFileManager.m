@@ -38,6 +38,11 @@ static NSString* const k_containerXmlFileName = @"META-INF/container.xml";
 
 - (void)openEpubWithPath:(NSString*)path
 {
+    if (path.length <= 0)
+    {
+        return;
+    }
+    
     NSURL* fileUrl = [[NSURL alloc] initFileURLWithPath:path
                                             isDirectory:NO];
     Class zipClass = [zipArchiver class];
@@ -49,7 +54,7 @@ static NSString* const k_containerXmlFileName = @"META-INF/container.xml";
     return (zipArchiver.entries != nil);
 }
 
-- (NSData*)contentXmlWithName:zipContentsName
+- (NSData*)contentXmlWithName:(NSString*)zipContentsName
                         error:(NSError**)error
 {
     for (ZZArchiveEntry* zipEntry in zipArchiver.entries)

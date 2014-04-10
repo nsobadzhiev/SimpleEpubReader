@@ -243,6 +243,14 @@
     XCTAssertTrue(epubManager.isOpen, @"The isOpen property should indicate that a file has been open");
 }
 
+- (void)testGettingMimeTypeForFile
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package xmlns=\"http://www.idpf.org/2007/opf\" version=\"2.0\" unique-identifier=\"bookid\">    <metadata>    <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>    <dc:language xmlns:dc=\"http://purl.org/dc/elements/1.1/\">en</dc:language>    <meta name=\"cover\" content=\"cover-image\"/>    </metadata>    <manifest>    <item id=\"id2778030\" href=\"index.html\" media-type=\"application/xml\"/>   <item id=\"id2528567\" href=\"pr01.html\" media-type=\"application/xhtml+xml\"/>    </manifest>    <spine toc=\"ncxtoc\">    <itemref idref=\"id2778030\"/>    <itemref idref=\"id2528567\"/>    </spine>    </package>";
+    [self setupEpubManagerForTestWithContentsXml:hardcodedContainer];
+    NSString* mimeType = [epubManager mimeTypeForPath:@"index.html"];
+    XCTAssertEqualObjects(mimeType, @"application/xml", @"Should be able to get the mime type, given the resource path");
+}
+
 #pragma mark Utility Methods
 
 - (void)setupEpubManagerForTestWithContentsXml:(NSString*)xml

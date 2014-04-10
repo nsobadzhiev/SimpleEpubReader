@@ -10,19 +10,24 @@
 
 @implementation DMTestableePubURLProtocol
 
-- (DMePubFileManager*)epubFileManager
+- (DMePubManager*)epubFileManager
 {
-    return fileManager;
+    return epubManager;
 }
 
-- (void)setEpubFileManager:(DMePubFileManager *)epubFileManager
+- (void)setEpubFileManager:(DMePubManager *)epubFileManager
 {
-    fileManager = epubFileManager;
+    epubManager = epubFileManager;
 }
 
 - (NSString*)epubPath
 {
     return [super epubFilePath];
+}
+
+- (NSString*)zipPath
+{
+    return [super zipPath];
 }
 
 @end

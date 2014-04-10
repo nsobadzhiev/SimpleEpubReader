@@ -88,23 +88,36 @@ static NSString* const k_itemIdRefAttrName = @"idref";
     return title;
 }
 
+- (NSArray*)epubItems
+{
+    if (epubItems == nil)
+    {
+        NSArray* manifestEntries = [[self manifestElement] children];
+        NSMutableArray* items = [NSMutableArray arrayWithCapacity:manifestEntries.count];
+        for (DDXMLElement* item in manifestEntries)
+        {
+            DMePubItem* epubItem = [self epubItemFromXml:item];
+            [items addObject:epubItem];
+        }
+        epubItems = items;
+    }
+    return epubItems;
+}
+
 - (NSArray*)epubHtmlItems
 {
     if (epubHtmlItems == nil)
     {
-        NSArray* manifestEntries = [[self manifestElement] children];
-        NSMutableArray* epubItems = [NSMutableArray arrayWithCapacity:manifestEntries.count];
-        for (DDXMLElement* item in manifestEntries)
+        NSArray* epubEntries = [self epubItems];
+        NSMutableArray* htmlEntries = [NSMutableArray arrayWithCapacity:epubEntries.count];
+        for (DMePubItem* item in epubEntries)
         {
-            DDXMLNode* mediaTypeNode = [item attributeForName:k_manifestItemAttrName];
-            NSString* itemMediaType = [mediaTypeNode stringValue];
-            if ([itemMediaType isEqualToString:k_xhtmlItemAttrValue])
+            if ([item.mediaType isEqualToString:k_xhtmlItemAttrValue])
             {
-                DMePubItem* epubItem = [self epubItemFromXml:item];
-                [epubItems addObject:epubItem];
+                [htmlEntries addObject:item];
             }
         }
-        epubHtmlItems = epubItems;
+        epubHtmlItems = htmlEntries;
     }
     return epubHtmlItems;
 }

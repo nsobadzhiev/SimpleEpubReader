@@ -33,6 +33,16 @@
     return [self initWithEpubPath:nil];
 }
 
+- (void)openEpubWithPath:(NSString*)path
+{
+    // invalidate old objects
+    rootFileParser = nil;
+    contentsParser = nil;
+    navigationParser = nil;
+    
+    [epubFileManager openEpubWithPath:path];
+}
+
 - (BOOL)isOpen
 {
     return epubFileManager.fileOpen;
@@ -97,6 +107,20 @@
 {
     DMContainerFileParser* contents = [self contentsParser];
     return [contents epubTitle];
+}
+
+- (NSString*)mimeTypeForPath:(NSString*)path
+{
+    DMContainerFileParser* contents = [self contentsParser];
+    NSArray* allResources = [contents epubItems];
+    for (DMePubItem* resource in allResources)
+    {
+        if ([resource.href isEqualToString:path])
+        {
+            return resource.mediaType;
+        }
+    }
+    return nil;
 }
 
 - (DMePubItem*)epubItemForSpineElement:(DMSpineItem*)spineItem

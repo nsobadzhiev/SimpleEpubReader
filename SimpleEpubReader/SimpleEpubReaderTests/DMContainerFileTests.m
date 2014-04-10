@@ -53,6 +53,17 @@
     XCTAssertNotNil(containerParser, @"The container file parser init method must NOT return nil if provided with a valid XML");
 }
 
+- (void)testReadingAllItems
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package xmlns=\"http://www.idpf.org/2007/opf\" version=\"2.0\" unique-identifier=\"bookid\">    <metadata>    <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>    <dc:language xmlns:dc=\"http://purl.org/dc/elements/1.1/\">en</dc:language>    <meta name=\"cover\" content=\"cover-image\"/>    </metadata>    <manifest>    <item id=\"id2778030\" href=\"index.html\" media-type=\"media1\"/>   <item id=\"id2528567\" href=\"pr01.html\" media-type=\"media2\"/>    </manifest>    <spine toc=\"ncxtoc\">    <itemref idref=\"id2778030\"/>    <itemref idref=\"id2528567\"/>    </spine>    </package>";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    NSArray* epubItems = [containerParser epubItems];
+    XCTAssert(epubItems.count == 2, @"Failed to parse the All items count from the epub container");
+    XCTAssertEqualObjects([(DMePubItem*)[epubItems firstObject] itemID], @"id2778030", @"Failed to retrieve the first item's ID");
+    XCTAssertEqualObjects([(DMePubItem*)[epubItems lastObject] itemID], @"id2528567", @"Failed to retrieve the last item's ID");
+}
+
 - (void)testReadingePubTitle
 {
     NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package xmlns=\"http://www.idpf.org/2007/opf\" version=\"2.0\" unique-identifier=\"bookid\">    <metadata>    <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>    <dc:language xmlns:dc=\"http://purl.org/dc/elements/1.1/\">en</dc:language>    <meta name=\"cover\" content=\"cover-image\"/>    </metadata>    <manifest>    <item id=\"id2778030\" href=\"index.html\" media-type=\"application/xhtml+xml\"/>   <item id=\"id2528567\" href=\"pr01.html\" media-type=\"application/xhtml+xml\"/>    </manifest>    <spine toc=\"ncxtoc\">    <itemref idref=\"id2778030\"/>    <itemref idref=\"id2528567\"/>    </spine>    </package>";

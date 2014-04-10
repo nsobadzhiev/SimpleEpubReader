@@ -32,10 +32,13 @@
 
 - (instancetype)initWithEpubPath:(NSString*)epubPath;
 
+- (void)openEpubWithPath:(NSString*)path;
+
 - (NSData*)dataForFileAtPath:(NSString*)filePath
                        error:(NSError**)error;
 - (NSData*)rootFileDataWithError:(NSError**)error;
 - (NSString*)titleWithError:(NSError**)error;
+- (NSString*)mimeTypeForPath:(NSString*)path;
 - (DMePubItem*)epubItemForSpineElement:(DMSpineItem*)spineItem;
 
 @end

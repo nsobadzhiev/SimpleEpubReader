@@ -11,10 +11,11 @@
 
 @interface DMePubURLProtocol : NSURLProtocol
 {
-    DMePubFileManager* fileManager;
+    DMePubManager* epubManager;
     NSURL* requestUrl;
 }
 
 - (NSString*)epubFilePath;
+- (NSString*)zipPath;
 
 @end

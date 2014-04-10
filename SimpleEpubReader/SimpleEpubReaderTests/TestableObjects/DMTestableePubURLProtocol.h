@@ -10,7 +10,8 @@
 
 @interface DMTestableePubURLProtocol : DMePubURLProtocol
 
-@property (nonatomic, strong) DMePubFileManager* epubFileManager;
+@property (nonatomic, strong) DMePubManager* epubFileManager;
 @property (nonatomic, readonly) NSString* epubPath;
+@property (nonatomic, readonly) NSString* zipPath;
 
 @end

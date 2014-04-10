@@ -21,7 +21,7 @@
 
 - (void)openEpubWithPath:(NSString*)path;
 
-- (NSData*)contentXmlWithName:zipContentsName
+- (NSData*)contentXmlWithName:(NSString*)zipContentsName
                         error:(NSError**)error;
 - (NSData*)containerXmlWithError:(NSError**)error;
 

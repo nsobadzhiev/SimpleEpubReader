@@ -14,6 +14,13 @@ static NSString* kEpubUrlPrefix = @"epub:/";
 @interface DMePubFileManager ()
 
 - (BOOL)openEpubWithUrl:(NSURL*)url;
+- (void)sendResponseWithData:(NSData*)data
+                       error:(NSError**)error;
+
+- (BOOL)handleError:(NSError*)error;
+- (void)handleResponse:(NSData*)data;
+- (void)handleResponseData:(NSData*)data;
+- (void)handleRequestFinished;
 
 @end
 
@@ -57,11 +64,71 @@ static NSString* kEpubUrlPrefix = @"epub:/";
     return [super requestIsCacheEquivalent:a toRequest:b];
 }
 
+- (void)startLoading
+{
+    NSString* filePath = [self epubFilePath];
+    NSString* zipPath = [self zipPath];
+    [epubManager openEpubWithPath:filePath];
+    NSError* zipError = nil;
+    NSData* fileData = [epubManager dataForFileAtPath:zipPath
+                                                error:&zipError];
+    [self sendResponseWithData:fileData
+                         error:&zipError];
+}
+
 - (BOOL)openEpubWithUrl:(NSURL*)url
 {
     requestUrl = url;
-    fileManager = [[DMePubFileManager alloc] initWithEpubPath:nil];
+    epubManager = [[DMePubManager alloc] initWithEpubPath:[self epubFilePath]];
     return YES;
+}
+
+- (void)sendResponseWithData:(NSData*)data
+                       error:(NSError**)error
+{
+    if ([self handleError:*error] == NO)
+    {
+        [self handleResponse:data];
+        [self handleResponseData:data];
+        [self handleRequestFinished];
+    }
+}
+
+- (BOOL)handleError:(NSError*)error
+{
+    if (error != nil)
+    {
+        [self.client URLProtocol:self
+                didFailWithError:error];
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+- (void)handleResponse:(NSData*)data
+{
+    NSString* mediaType = [epubManager mimeTypeForPath:[self zipPath]];
+    NSURLResponse* response = [[NSURLResponse alloc] initWithURL:requestUrl
+                                                        MIMEType:mediaType
+                                           expectedContentLength:data.length
+                                                textEncodingName:@"utf-8"];
+    [self.client URLProtocol:self
+          didReceiveResponse:response
+          cacheStoragePolicy:NSURLCacheStorageAllowed];
+}
+
+- (void)handleResponseData:(NSData*)data
+{
+    [self.client URLProtocol:self
+                 didLoadData:data];
+}
+
+- (void)handleRequestFinished
+{
+    [self.client URLProtocolDidFinishLoading:self];
 }
 
 - (NSString*)epubFilePath
@@ -71,29 +138,47 @@ static NSString* kEpubUrlPrefix = @"epub:/";
                                                      withString:@""];
     while (urlString.length > 0)
     {
-        NSString* lastComponent = [urlString lastPathComponent];
-        NSRange lastComponentRange = [urlString rangeOfString:lastComponent];
-        NSString* urlWithoutLastComponent = [urlString substringToIndex:lastComponentRange.location];
-        
         // try to open the epub at that path
-        [fileManager openEpubWithPath:urlWithoutLastComponent];
-        if (fileManager.fileOpen)
+        [epubManager openEpubWithPath:urlString];
+        if ([epubManager isOpen] == YES)
         {
-            if ([urlWithoutLastComponent characterAtIndex:urlWithoutLastComponent.length - 1] == '/')
+            if ([urlString characterAtIndex:urlString.length - 1] == '/')
             {
-                return [urlWithoutLastComponent substringToIndex:urlWithoutLastComponent.length - 1];
+                return [urlString substringToIndex:urlString.length - 1];
             }
             else
             {
-                return urlWithoutLastComponent;
+                return urlString;
             }
         }
         else
         {
+            NSString* lastComponent = [urlString lastPathComponent];
+            NSRange lastComponentRange = [urlString rangeOfString:lastComponent];
+            NSString* urlWithoutLastComponent = [urlString substringToIndex:lastComponentRange.location];
             urlString = urlWithoutLastComponent;
         }
     }
     return nil;
+}
+
+- (NSString*)zipPath
+{
+    NSString* fullUrl = [requestUrl absoluteString];
+    NSString* epubFilePath = [self epubFilePath];
+    NSString* zipPath = nil;
+    if (epubFilePath.length > 0)
+    {
+        NSRange epubFileRange = [fullUrl rangeOfString:epubFilePath];
+        // The +1 in the next statement makes sure the path separator ("/") is not
+        // included in the result
+        NSUInteger zipPathStartIndex = epubFileRange.location + epubFileRange.length + 1;
+        if (epubFileRange.location != NSNotFound && zipPathStartIndex < fullUrl.length)
+        {
+            zipPath = [fullUrl substringFromIndex:zipPathStartIndex];
+        }
+    }
+    return zipPath;
 }
 
 @end

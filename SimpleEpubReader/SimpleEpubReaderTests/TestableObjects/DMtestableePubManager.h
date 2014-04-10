@@ -14,6 +14,7 @@
 @property (nonatomic, strong) DMePubFileManager* fileManager;
 @property (nonatomic, strong) DMRootFileParser* rootParser;
 @property (nonatomic, strong) DMContainerFileParser* contentsXmlParser;
+@property (nonatomic, strong) NSString* contentsXml;
 @property (nonatomic, strong) DMTableOfContents* navParser;
 
 @end
