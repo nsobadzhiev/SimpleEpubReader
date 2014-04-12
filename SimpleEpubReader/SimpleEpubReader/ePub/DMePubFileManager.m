@@ -45,7 +45,7 @@ static NSString* const k_containerXmlFileName = @"META-INF/container.xml";
     
     NSURL* fileUrl = [[NSURL alloc] initFileURLWithPath:path
                                             isDirectory:NO];
-    Class zipClass = [zipArchiver class];
+    Class zipClass = [zipArchiver class] == nil ? [ZZArchive class] : [zipArchiver class];
     zipArchiver = [zipClass archiveWithContentsOfURL:fileUrl];
 }
 

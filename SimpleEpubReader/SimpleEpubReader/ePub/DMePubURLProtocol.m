@@ -76,6 +76,13 @@ static NSString* kEpubUrlPrefix = @"epub:/";
                          error:&zipError];
 }
 
+- (void)stopLoading
+{
+    // TODO: Make sure no delegate methods are called beyond this point. There 
+    // is no async work done here, but still all subsequent delegate method
+    // calls should be prevented.
+}
+
 - (BOOL)openEpubWithUrl:(NSURL*)url
 {
     requestUrl = url;
@@ -136,6 +143,7 @@ static NSString* kEpubUrlPrefix = @"epub:/";
     NSString* urlString = [requestUrl absoluteString];
     urlString = [urlString stringByReplacingOccurrencesOfString:kEpubUrlPrefix
                                                      withString:@""];
+    urlString = [urlString stringByRemovingPercentEncoding];
     while (urlString.length > 0)
     {
         // try to open the epub at that path
@@ -164,7 +172,7 @@ static NSString* kEpubUrlPrefix = @"epub:/";
 
 - (NSString*)zipPath
 {
-    NSString* fullUrl = [requestUrl absoluteString];
+    NSString* fullUrl = [[requestUrl absoluteString] stringByRemovingPercentEncoding];
     NSString* epubFilePath = [self epubFilePath];
     NSString* zipPath = nil;
     if (epubFilePath.length > 0)

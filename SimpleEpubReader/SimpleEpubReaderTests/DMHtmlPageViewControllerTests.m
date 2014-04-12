@@ -54,6 +54,12 @@
     XCTAssert(webView.canGoForward == NO, @"Going forward should be disabled");
 }
 
+- (void)testAbilityToSetFilePath
+{
+    htmlPageController = [[DMHtmlPageViewController alloc] initWithData:nil];
+    XCTAssertNoThrow(htmlPageController.filePath = @"testPath", @"DMHtmlPageViewController should have a filePath property");
+}
+
 - (void)testWebViewDelegateIsHtmlPageViewController
 {
     htmlPageController = [[DMHtmlPageViewController alloc] initWithData:nil];

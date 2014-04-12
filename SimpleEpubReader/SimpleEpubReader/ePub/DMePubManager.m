@@ -24,6 +24,7 @@
     if (self)
     {
         epubFileManager = [[DMePubFileManager alloc] initWithEpubPath:epubPath];
+        _epubPath = epubPath;
     }
     return self;
 }
@@ -41,6 +42,7 @@
     navigationParser = nil;
     
     [epubFileManager openEpubWithPath:path];
+    _epubPath = path;
 }
 
 - (BOOL)isOpen

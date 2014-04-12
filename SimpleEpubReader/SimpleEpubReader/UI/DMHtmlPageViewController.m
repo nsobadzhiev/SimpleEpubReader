@@ -34,10 +34,13 @@
 {
     [super viewDidLoad];
     UIWebView* webView = (UIWebView*)self.view;
+    NSString* epubPath = [NSString stringWithFormat:@"%@%@/", @"epub:/", self.filePath];
+    epubPath = [epubPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [webView setScalesPageToFit:YES];
     [webView loadData:htmlData
              MIMEType:@"application/xhtml+xml"
      textEncodingName:@"utf-8"
-              baseURL:[NSURL URLWithString:@"file:///epub/"]];
+              baseURL:[NSURL URLWithString:epubPath]];
 }
 
 - (void)didReceiveMemoryWarning

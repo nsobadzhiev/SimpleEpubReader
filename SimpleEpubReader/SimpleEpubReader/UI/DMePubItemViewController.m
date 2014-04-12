@@ -23,6 +23,7 @@
     {
         self.epubItem = epubItem;
         self.epubManager = epubManager;
+        self.filePath = self.epubManager.epubPath;
     }
     return self;
 }

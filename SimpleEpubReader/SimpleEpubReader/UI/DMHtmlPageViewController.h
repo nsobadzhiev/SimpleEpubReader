@@ -13,6 +13,8 @@
     NSData* htmlData;
 }
 
+@property (nonatomic, strong) NSString* filePath;
+
 - (instancetype)initWithData:(NSData*)htmlData;
 
 @end

@@ -185,6 +185,13 @@
     XCTAssertNoThrow([urlProtocol startLoading], @"There should be a startLoading method available");
 }
 
+- (void)testCallingStopLoadingWithoutException
+{
+    // if an NSURLProtocol subclass does not override the stopLoading method
+    // an exception is thrown. Make sure this class avoids that
+    XCTAssertNoThrow([urlProtocol stopLoading], @"Should have overidden the stopLoading method to avoid an exception");
+}
+
 - (void)testStartLoadingIsFetchingData
 {
     DMTestableArchive* archiver = [[DMTestableArchive alloc] init];

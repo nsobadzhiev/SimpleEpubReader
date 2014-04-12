@@ -53,4 +53,14 @@
     XCTAssertEqualObjects(manager, retrievedManager, @"Should be able to get the epub manager after initializing");
 }
 
+- (void)testSettingTheEpubFilePath
+{
+    NSString* filePath = @"testPath";
+    DMePubManager* manager = [[DMePubManager alloc] initWithEpubPath:filePath];
+    DMePubItemViewController* epubItemController = [[DMePubItemViewController alloc] initWithEpubItem:nil
+                                                                                       andEpubManager:manager];
+    NSString* retrievedPath = epubItemController.filePath;
+    XCTAssertEqualObjects(filePath, retrievedPath, @"DMePubItemViewController should get the epubPath from the epub manager and store it in the filePath property");
+}
+
 @end

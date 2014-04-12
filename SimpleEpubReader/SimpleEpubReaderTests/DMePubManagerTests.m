@@ -47,6 +47,22 @@
     XCTAssertNotNil(fileManager, @"ePub Manager should create a DMePubFileManager instance upon creation");
 }
 
+- (void)testGettingTheFilePathFromTheEpubManager
+{
+    NSString* filePath = @"testPath";
+    DMePubManager* manager = [[DMePubManager alloc] initWithEpubPath:filePath];
+    XCTAssertEqualObjects(filePath, manager.epubPath, @"Should be able to retrieve the file path the manager was initialized with");
+}
+
+- (void)testGettingTheFilePathAfterOpeningAnotherEpub
+{
+    NSString* filePath = @"testPath";
+    DMePubManager* manager = [[DMePubManager alloc] initWithEpubPath:filePath];
+    NSString* secondPath = @"Path 2.0";
+    [manager openEpubWithPath:secondPath];
+    XCTAssertEqualObjects(secondPath, manager.epubPath, @"Should be able to retrieve the file path that last opened last");
+}
+
 - (void)testEpubManagerReturnsTheRootFileLocation
 {
     NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <container xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\"version=\"1.0\">    <rootfiles>    <rootfile full-path=\"OEBPS/content.opf\" media-type=\"application/oebps-package+xml\"/>    </rootfiles>    </container>";

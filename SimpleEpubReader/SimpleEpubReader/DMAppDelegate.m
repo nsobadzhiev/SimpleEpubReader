@@ -7,6 +7,7 @@
 //
 
 #import "DMAppDelegate.h"
+#import "DMePubURLProtocol.h"
 
 @implementation DMAppDelegate
 
@@ -29,6 +30,7 @@
     [self.window setRootViewController:initViewController];
     
     [self.window makeKeyAndVisible];
+    [NSURLProtocol registerClass:[DMePubURLProtocol class]];
     return YES;
 }
 
