@@ -144,4 +144,13 @@
     XCTAssert(pageController.pageViewController.viewControllers.count != 0, @"DMePubPageViewController should populate it's UIPageViewController with screens");
 }
 
+- (void)testEpubPageViewControllerSetsNavigationControllerAsOpaque
+{
+    pageController = [[DMePubPageViewController alloc] initWithEpubManager:nil];
+    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:pageController];
+    [navController view];
+    [pageController view];
+    XCTAssertFalse(pageController.navigationController.navigationBar.translucent, @"The navigation bar should not be translucent so that the page controller does not draw behind it");
+}
+
 @end
