@@ -11,6 +11,7 @@
 #import "DMTestableePubManager.h"
 #import "DMePubItemViewController.h"
 #import "DMTestableePubPageViewController.h"
+#import "DMTableOfContentsTableViewController.h"
 
 @interface DMePubPageViewControllerTests : XCTestCase
 {
@@ -59,6 +60,14 @@
 {
     pageController = [[DMePubPageViewController alloc] initWithEpubManager:nil];
     XCTAssert([pageController conformsToProtocol:@protocol(UIPageViewControllerDataSource)], @"DMePubPageViewController should be a UIPageViewControllerDataSource");
+}
+
+- (void)testTheFirstViewControllerIsTableOfContents
+{
+    pageController = [[DMePubPageViewController alloc] initWithEpubManager:nil];
+    [pageController view];
+    NSObject* viewController = [pageController.pageViewController.viewControllers firstObject];
+    XCTAssertTrue([viewController isKindOfClass:[DMTableOfContentsTableViewController class]], @"Initially, the table of contents should be shown as the first page");
 }
 
 - (void)testEpubPageViewControllerReturnsEpubItemViewControllersFromTheDataSourceMethods

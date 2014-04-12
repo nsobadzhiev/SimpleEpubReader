@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DMePubManager.h"
 #import "DMePubItemIterator.h"
+#import "DMTableOfContentsTableViewController.h"
 
 @interface DMePubPageViewController : UIViewController <UIPageViewControllerDataSource>
 {
     DMePubItemIterator* itemIterator;
+    DMTableOfContentsTableViewController* tableOfContentsController;
 }
 
 @property (nonatomic, strong) UIPageViewController* pageViewController;

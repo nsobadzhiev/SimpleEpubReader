@@ -48,7 +48,8 @@
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
                                                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                             options:nil];
-    [self.pageViewController setViewControllers:@[[DMePubItemViewController new]]
+    tableOfContentsController = [[DMTableOfContentsTableViewController alloc] initWithEpubPath:self.epubManager.epubPath];
+    [self.pageViewController setViewControllers:@[tableOfContentsController]
                                       direction:UIPageViewControllerNavigationDirectionForward 
                                        animated:YES 
                                      completion:nil];
@@ -67,15 +68,17 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    DMePubItemViewController* currentController = (DMePubItemViewController*)viewController;
-    DMePubItem* currentItem = [itemIterator currentItem];
-    DMePubItem* viewControllerItem = [currentController epubItem];
-    
-    if ([viewControllerItem isEqual:currentItem] == NO)
+    if ([viewController isKindOfClass:[DMePubItemViewController class]])
     {
-        [itemIterator goToItemWithPath:viewControllerItem.href];
+        DMePubItemViewController* currentController = (DMePubItemViewController*)viewController;
+        DMePubItem* currentItem = [itemIterator currentItem];
+        DMePubItem* viewControllerItem = [currentController epubItem];
+        
+        if ([viewControllerItem isEqual:currentItem] == NO)
+        {
+            [itemIterator goToItemWithPath:viewControllerItem.href];
+        }
     }
-    
     return [[DMePubItemViewController alloc] initWithEpubItem:[itemIterator previousItem]
                                                andEpubManager:self.epubManager];
 }
@@ -83,16 +86,18 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
        viewControllerAfterViewController:(UIViewController *)viewController
 {
-    DMePubItemViewController* currentController = (DMePubItemViewController*)viewController;
-    DMePubItem* currentItem = [itemIterator currentItem];
-    DMePubItem* viewControllerItem = [currentController epubItem];
-    
-    if (viewControllerItem != nil &&
-        [viewControllerItem isEqual:currentItem] == NO)
+    if ([viewController isKindOfClass:[DMePubItemViewController class]])
     {
-        [itemIterator goToItemWithPath:viewControllerItem.href];
+        DMePubItemViewController* currentController = (DMePubItemViewController*)viewController;
+        DMePubItem* currentItem = [itemIterator currentItem];
+        DMePubItem* viewControllerItem = [currentController epubItem];
+        
+        if (viewControllerItem != nil &&
+            [viewControllerItem isEqual:currentItem] == NO)
+        {
+            [itemIterator goToItemWithPath:viewControllerItem.href];
+        }
     }
-
     return [[DMePubItemViewController alloc] initWithEpubItem:[itemIterator nextObject]
                                                andEpubManager:self.epubManager];
 }

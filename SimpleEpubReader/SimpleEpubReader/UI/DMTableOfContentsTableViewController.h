@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DMTableOfContentsDataSource.h"
 
 @interface DMTableOfContentsTableViewController : UITableViewController
 {
     NSString* epubPath;
+    DMTableOfContentsDataSource* tocDataSource;
 }
 
 - (id)initWithEpubPath:(NSString*)epubPath;

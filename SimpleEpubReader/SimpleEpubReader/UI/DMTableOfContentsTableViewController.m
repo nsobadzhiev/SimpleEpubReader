@@ -7,7 +7,6 @@
 //
 
 #import "DMTableOfContentsTableViewController.h"
-#import "DMTableOfContentsDataSource.h"
 
 @interface DMTableOfContentsTableViewController ()
 
@@ -34,7 +33,7 @@
 {
     [super viewDidLoad];
     
-    DMTableOfContentsDataSource* tocDataSource = [[DMTableOfContentsDataSource alloc] initWithEpubPath:epubPath];
+    tocDataSource = [[DMTableOfContentsDataSource alloc] initWithEpubPath:epubPath];
     self.tableView.dataSource = tocDataSource;
 }
 
