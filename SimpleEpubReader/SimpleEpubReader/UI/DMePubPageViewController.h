@@ -11,7 +11,7 @@
 #import "DMePubItemIterator.h"
 #import "DMTableOfContentsTableViewController.h"
 
-@interface DMePubPageViewController : UIViewController <UIPageViewControllerDataSource>
+@interface DMePubPageViewController : UIViewController <UIPageViewControllerDataSource, DMTableOfContentsTableViewControllerDelegate>
 {
     DMePubItemIterator* itemIterator;
     DMTableOfContentsTableViewController* tableOfContentsController;

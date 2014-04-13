@@ -49,6 +49,7 @@
                                                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                             options:nil];
     tableOfContentsController = [[DMTableOfContentsTableViewController alloc] initWithEpubPath:self.epubManager.epubPath];
+    tableOfContentsController.delegate = self;
     [self.pageViewController setViewControllers:@[tableOfContentsController]
                                       direction:UIPageViewControllerNavigationDirectionForward 
                                        animated:YES 
@@ -79,8 +80,20 @@
             [itemIterator goToItemWithPath:viewControllerItem.href];
         }
     }
-    return [[DMePubItemViewController alloc] initWithEpubItem:[itemIterator previousItem]
-                                               andEpubManager:self.epubManager];
+    DMePubItem* previousItem = [itemIterator previousItem];
+    UIViewController* previousController = nil;
+    if (previousItem == nil)
+    {
+        // if the begining of the book has been reached, open the table of
+        // contents
+        previousController = tableOfContentsController;
+    }
+    else
+    {
+        previousController = [[DMePubItemViewController alloc] initWithEpubItem:[itemIterator previousItem]
+                                                                 andEpubManager:self.epubManager];
+    }
+    return previousController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController 
@@ -100,6 +113,20 @@
     }
     return [[DMePubItemViewController alloc] initWithEpubItem:[itemIterator nextObject]
                                                andEpubManager:self.epubManager];
+}
+
+#pragma mark - DMTableOfContentsTableViewControllerDelegate
+
+- (void)tableOfContentsController:(DMTableOfContentsTableViewController*)tocController
+            didSelectItemWithPath:(NSString*)path
+{
+    [itemIterator goToItemWithPath:path];
+    DMePubItemViewController* selectedItemController = [[DMePubItemViewController alloc] initWithEpubItem:[itemIterator currentItem]
+                                                                                           andEpubManager:self.epubManager];
+    [self.pageViewController setViewControllers:@[selectedItemController]
+                                      direction:UIPageViewControllerNavigationDirectionForward 
+                                       animated:YES 
+                                     completion:nil];
 }
 
 @end

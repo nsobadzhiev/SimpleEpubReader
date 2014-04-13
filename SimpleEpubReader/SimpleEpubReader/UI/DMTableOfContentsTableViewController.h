@@ -9,11 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "DMTableOfContentsDataSource.h"
 
-@interface DMTableOfContentsTableViewController : UITableViewController
+@class DMTableOfContentsTableViewController;
+
+@protocol DMTableOfContentsTableViewControllerDelegate <NSObject>
+
+- (void)tableOfContentsController:(DMTableOfContentsTableViewController*)tocController
+            didSelectItemWithPath:(NSString*)path;
+
+@end
+
+@interface DMTableOfContentsTableViewController : UITableViewController <DMTableOfContentsDelegate>
 {
     NSString* epubPath;
     DMTableOfContentsDataSource* tocDataSource;
 }
+
+@property (nonatomic, weak) id<DMTableOfContentsTableViewControllerDelegate> delegate;
 
 - (id)initWithEpubPath:(NSString*)epubPath;
 

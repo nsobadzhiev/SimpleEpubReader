@@ -44,4 +44,14 @@
     XCTAssert([tocController.tableView.dataSource isKindOfClass:[DMTableOfContentsDataSource class]]);
 }
 
+- (void)testHavingTheRightDelegate
+{
+    XCTAssert([tocController.tableView.delegate isKindOfClass:[DMTableOfContentsDataSource class]]);
+}
+
+- (void)testBeingADMTableOfContentsDataSourceDelegate
+{
+    XCTAssertTrue([tocController conformsToProtocol:@protocol(DMTableOfContentsDelegate)], @"Should implement the DMTableOfContentsDelegate protocol");
+}
+
 @end
