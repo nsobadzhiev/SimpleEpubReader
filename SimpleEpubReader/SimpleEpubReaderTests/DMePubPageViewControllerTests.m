@@ -162,4 +162,51 @@
     XCTAssertFalse(pageController.navigationController.navigationBar.translucent, @"The navigation bar should not be translucent so that the page controller does not draw behind it");
 }
 
+- (void)testReturningNilAfterLastPage
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package>    	<metadata>     <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>       	</metadata> <manifest>    <item id=\"1\" href=\"index1.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"2\" href=\"index2.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"3\" href=\"index3.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"4\" href=\"index4.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"5\" href=\"index5.html\" media-type=\"application/xhtml+xml\"/> 	</manifest>  	<spine toc=\"ncxtoc\">        <itemref idref=\"1\"/>     <itemref idref=\"2\"/>     <itemref idref=\"3\"/>     <itemref idref=\"4\"/>     <itemref idref=\"5\"/>    	</spine>        </package>";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    DMContainerFileParser* containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:nil];
+    epubManager.contentsXmlParser = containerParser;
+    pageController = [[DMePubPageViewController alloc] initWithEpubManager:epubManager];
+    DMePubItem* epubItem = [DMePubItem ePubItemWithId:@"5" 
+                                            mediaType:@"application/xhtml+xml"
+                                                 href:@"index5.html"];
+    DMePubItemViewController* itemController = [[DMePubItemViewController alloc] initWithEpubItem:epubItem
+                                                                                   andEpubManager:epubManager];
+    DMePubItemViewController* nextController = (DMePubItemViewController*)[pageController pageViewController:pageController.pageViewController
+                                                                           viewControllerAfterViewController:itemController];
+    XCTAssertNil(nextController, @"Should return nil after the last page to prevent UIPageViewController from trying to display additional pages");
+}
+
+- (void)testFirstPageIsTableOfContents
+{
+    pageController = [[DMePubPageViewController alloc] initWithEpubManager:nil];
+    [pageController view];
+    UIViewController* firstPage = [pageController.pageViewController.viewControllers firstObject];
+    XCTAssertTrue([firstPage isKindOfClass:[DMTableOfContentsTableViewController class]], @"Should always set the table of contents as the first page");
+}
+
+- (void)testReturningToTableOfContentsAfterReachingTheBeginingOfTheBook
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package>    	<metadata>     <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>       	</metadata> <manifest>    <item id=\"1\" href=\"index1.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"2\" href=\"index2.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"3\" href=\"index3.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"4\" href=\"index4.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"5\" href=\"index5.html\" media-type=\"application/xhtml+xml\"/> 	</manifest>  	<spine toc=\"ncxtoc\">        <itemref idref=\"1\"/>     <itemref idref=\"2\"/>     <itemref idref=\"3\"/>     <itemref idref=\"4\"/>     <itemref idref=\"5\"/>    	</spine>        </package>";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    DMContainerFileParser* containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:nil];
+    epubManager.contentsXmlParser = containerParser;
+    pageController = [[DMePubPageViewController alloc] initWithEpubManager:epubManager];
+    [pageController view];
+    DMePubItem* epubItem = [DMePubItem ePubItemWithId:@"2" 
+                                            mediaType:@"application/xhtml+xml"
+                                                 href:@"index2.html"];
+    DMePubItemViewController* itemController = [[DMePubItemViewController alloc] initWithEpubItem:epubItem
+                                                                                   andEpubManager:epubManager];
+    UIViewController* nextController = (DMePubItemViewController*)[pageController pageViewController:pageController.pageViewController
+                                                                          viewControllerBeforeViewController:itemController];
+    nextController = (DMePubItemViewController*)[pageController pageViewController:pageController.pageViewController
+                                                viewControllerBeforeViewController:nextController];
+    XCTAssertTrue([nextController isKindOfClass:[DMTableOfContentsTableViewController class]], @"Should return to table of contents after reaching the first page");
+}
+
 @end

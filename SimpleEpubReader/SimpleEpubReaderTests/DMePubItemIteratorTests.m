@@ -132,4 +132,20 @@
     XCTAssertEqualObjects([epubItem href], @"index4.html", @"Failed to skip to the forth item");
 }
 
+- (void)testResetingIteratorAfterReachingTheBegining
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package>    	<metadata>     <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>       	</metadata> <manifest>    <item id=\"1\" href=\"index1.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"2\" href=\"index2.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"3\" href=\"index3.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"4\" href=\"index4.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"5\" href=\"index5.html\" media-type=\"application/xhtml+xml\"/> 	</manifest>  	<spine toc=\"ncxtoc\">        <itemref idref=\"1\"/>     <itemref idref=\"2\"/>     <itemref idref=\"3\"/>     <itemref idref=\"4\"/>     <itemref idref=\"5\"/>    	</spine>        </package>";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    DMContainerFileParser* containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:nil];
+    epubManager.contentsXmlParser = containerParser;
+    epubIterator = [DMePubItemIterator epubIteratorWithEpubManager:epubManager];
+    [epubIterator goToItemWithPath:@"index3.html"];
+    [epubIterator previousItem];
+    [epubIterator previousItem];
+    [epubIterator previousItem];
+    DMePubItem* epubItem = [epubIterator nextObject];
+    XCTAssertEqualObjects([epubItem href], @"index1.html", @"If the begining of the array is reached via the previousItem method, the iterator should be ready to return the first item if it is asked for the next object");
+}
+
 @end

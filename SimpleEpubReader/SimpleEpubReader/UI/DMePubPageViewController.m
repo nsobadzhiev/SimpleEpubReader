@@ -90,7 +90,7 @@
     }
     else
     {
-        previousController = [[DMePubItemViewController alloc] initWithEpubItem:[itemIterator previousItem]
+        previousController = [[DMePubItemViewController alloc] initWithEpubItem:previousItem
                                                                  andEpubManager:self.epubManager];
     }
     return previousController;
@@ -111,8 +111,16 @@
             [itemIterator goToItemWithPath:viewControllerItem.href];
         }
     }
-    return [[DMePubItemViewController alloc] initWithEpubItem:[itemIterator nextObject]
-                                               andEpubManager:self.epubManager];
+    DMePubItem* nextItem = [itemIterator nextObject];
+    if (nextItem != nil)
+    {
+        return [[DMePubItemViewController alloc] initWithEpubItem:nextItem
+                                                   andEpubManager:self.epubManager];
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 #pragma mark - DMTableOfContentsTableViewControllerDelegate

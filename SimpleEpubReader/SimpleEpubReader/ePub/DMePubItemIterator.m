@@ -61,6 +61,7 @@
 {
     if (currentSpineItemIndex < 1)
     {
+        currentSpineItemIndex = -1;
         return nil;
     }
     DMSpineItem* currentSpineItem = [[epubManager spineItems] objectAtIndex:--currentSpineItemIndex];
