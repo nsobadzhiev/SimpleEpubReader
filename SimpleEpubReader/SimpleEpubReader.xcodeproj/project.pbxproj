@@ -54,6 +54,9 @@
 		237DAEBB18DA418F003C0A3E /* DMePubItemViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 237DAEBA18DA418F003C0A3E /* DMePubItemViewControllerTests.m */; };
 		237DAEBE18DA4242003C0A3E /* DMePubItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 237DAEBD18DA4242003C0A3E /* DMePubItemViewController.m */; };
 		237DAEBF18DA4242003C0A3E /* DMePubItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 237DAEBD18DA4242003C0A3E /* DMePubItemViewController.m */; };
+		239603B818FB1CB2006D0E1B /* DMBookmarkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603B718FB1CB2006D0E1B /* DMBookmarkTests.m */; };
+		239603BB18FB1DA6006D0E1B /* DMBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603BA18FB1DA6006D0E1B /* DMBookmark.m */; };
+		239603BC18FB1DA6006D0E1B /* DMBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603BA18FB1DA6006D0E1B /* DMBookmark.m */; };
 		239DEA7118B8CC4400ECF1DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7018B8CC4400ECF1DD /* Foundation.framework */; };
 		239DEA7318B8CC4400ECF1DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */; };
 		239DEA7518B8CC4400ECF1DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7418B8CC4400ECF1DD /* UIKit.framework */; };
@@ -166,6 +169,9 @@
 		237DAEBA18DA418F003C0A3E /* DMePubItemViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMePubItemViewControllerTests.m; sourceTree = "<group>"; };
 		237DAEBC18DA4242003C0A3E /* DMePubItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMePubItemViewController.h; sourceTree = "<group>"; };
 		237DAEBD18DA4242003C0A3E /* DMePubItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMePubItemViewController.m; sourceTree = "<group>"; };
+		239603B718FB1CB2006D0E1B /* DMBookmarkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMBookmarkTests.m; sourceTree = "<group>"; };
+		239603B918FB1DA6006D0E1B /* DMBookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMBookmark.h; path = ePub/DMBookmark.h; sourceTree = "<group>"; };
+		239603BA18FB1DA6006D0E1B /* DMBookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMBookmark.m; path = ePub/DMBookmark.m; sourceTree = "<group>"; };
 		239DEA6D18B8CC4400ECF1DD /* SimpleEpubReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleEpubReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DEA7018B8CC4400ECF1DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -386,6 +392,7 @@
 				2324989718DF5C8700330ACA /* DMDocumentsViewControllerTests.m */,
 				2324989918DF5CD000330ACA /* DMDocumentsFileManagerTests.m */,
 				234F0E1818EC7B7C001EFF40 /* DMePubURLProtocolTests.m */,
+				239603B718FB1CB2006D0E1B /* DMBookmarkTests.m */,
 			);
 			path = SimpleEpubReaderTests;
 			sourceTree = "<group>";
@@ -485,6 +492,8 @@
 				2329FA4E18D79FCE0068488A /* DMePubItemIterator.m */,
 				234F0E1A18EC7D44001EFF40 /* DMePubURLProtocol.h */,
 				234F0E1B18EC7D44001EFF40 /* DMePubURLProtocol.m */,
+				239603B918FB1DA6006D0E1B /* DMBookmark.h */,
+				239603BA18FB1DA6006D0E1B /* DMBookmark.m */,
 			);
 			name = ePub;
 			sourceTree = "<group>";
@@ -597,6 +606,7 @@
 				2325216018BE86C30076DA00 /* NSError+Description.m in Sources */,
 				23A803A318C91DA80038604A /* DDXMLNode+ChildForName.m in Sources */,
 				232498AD18DF847200330ACA /* DMDocumentsViewController.m in Sources */,
+				239603BB18FB1DA6006D0E1B /* DMBookmark.m in Sources */,
 				23322D3218D7847F002984D1 /* DMHtmlPageViewController.m in Sources */,
 				23322D2718D64D74002984D1 /* DMTableOfContentsDataSource.m in Sources */,
 				232498A218DF5E5300330ACA /* DMDocumentsFileManager.m in Sources */,
@@ -624,6 +634,7 @@
 			files = (
 				239DEA9618B8CC4500ECF1DD /* SimpleEpubReaderTests.m in Sources */,
 				23322D2118D34D61002984D1 /* DMTestableTableOfContentsDataSource.m in Sources */,
+				239603B818FB1CB2006D0E1B /* DMBookmarkTests.m in Sources */,
 				23A435EE18CB9DFB0060754D /* DMePubItem.m in Sources */,
 				23A435FC18CF9A210060754D /* DMTableOfContents.m in Sources */,
 				232FC58718EB63F4009E5EBB /* DMTestableePubPageViewController.m in Sources */,
@@ -650,6 +661,7 @@
 				232498A618DF5E7A00330ACA /* DMTestableDocumentsFileManager.m in Sources */,
 				23A72B8618C5187B00B5B7B8 /* ZZArchiveEntry+TestableContainer.m in Sources */,
 				234F0E2018EDE8D4001EFF40 /* DMTestableePubURLProtocol.m in Sources */,
+				239603BC18FB1DA6006D0E1B /* DMBookmark.m in Sources */,
 				23F18A0118BBEE4000EC3B92 /* DMePubFileManager.m in Sources */,
 				232498AA18DF79C200330ACA /* DMTestableFileSystemManager.m in Sources */,
 				23A72BA218C5241500B5B7B8 /* DMRootFileParser.m in Sources */,
