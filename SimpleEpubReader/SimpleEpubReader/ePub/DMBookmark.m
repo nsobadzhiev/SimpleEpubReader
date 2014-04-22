@@ -14,6 +14,20 @@ static NSString* const k_filePositionEncodingKey = @"bookmarkFilePosition";
 
 @implementation DMBookmark
 
+- (instancetype)initWithFileName:(NSString*)fileName
+                         section:(NSString*)section
+                        position:(BookmarkPosition*)position
+{
+    self = [super init];
+    if (self)
+    {
+        self.fileName = fileName;
+        self.fileSection = section;
+        self.filePosition = position;
+    }
+    return self;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];

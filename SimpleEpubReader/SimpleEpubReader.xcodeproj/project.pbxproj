@@ -57,6 +57,9 @@
 		239603B818FB1CB2006D0E1B /* DMBookmarkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603B718FB1CB2006D0E1B /* DMBookmarkTests.m */; };
 		239603BB18FB1DA6006D0E1B /* DMBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603BA18FB1DA6006D0E1B /* DMBookmark.m */; };
 		239603BC18FB1DA6006D0E1B /* DMBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603BA18FB1DA6006D0E1B /* DMBookmark.m */; };
+		239603BE18FDD0AA006D0E1B /* DMBookmarkManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603BD18FDD0AA006D0E1B /* DMBookmarkManagerTests.m */; };
+		239603C118FDD13F006D0E1B /* DMBookmarkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603C018FDD13F006D0E1B /* DMBookmarkManager.m */; };
+		239603C218FDD13F006D0E1B /* DMBookmarkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 239603C018FDD13F006D0E1B /* DMBookmarkManager.m */; };
 		239DEA7118B8CC4400ECF1DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7018B8CC4400ECF1DD /* Foundation.framework */; };
 		239DEA7318B8CC4400ECF1DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */; };
 		239DEA7518B8CC4400ECF1DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239DEA7418B8CC4400ECF1DD /* UIKit.framework */; };
@@ -172,6 +175,9 @@
 		239603B718FB1CB2006D0E1B /* DMBookmarkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMBookmarkTests.m; sourceTree = "<group>"; };
 		239603B918FB1DA6006D0E1B /* DMBookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMBookmark.h; path = ePub/DMBookmark.h; sourceTree = "<group>"; };
 		239603BA18FB1DA6006D0E1B /* DMBookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMBookmark.m; path = ePub/DMBookmark.m; sourceTree = "<group>"; };
+		239603BD18FDD0AA006D0E1B /* DMBookmarkManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMBookmarkManagerTests.m; sourceTree = "<group>"; };
+		239603BF18FDD13F006D0E1B /* DMBookmarkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMBookmarkManager.h; path = ePub/DMBookmarkManager.h; sourceTree = "<group>"; };
+		239603C018FDD13F006D0E1B /* DMBookmarkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMBookmarkManager.m; path = ePub/DMBookmarkManager.m; sourceTree = "<group>"; };
 		239DEA6D18B8CC4400ECF1DD /* SimpleEpubReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleEpubReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239DEA7018B8CC4400ECF1DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		239DEA7218B8CC4400ECF1DD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -254,7 +260,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23315F2F18E0D92800BEA595 /* libzipzap.a in Frameworks */,
 				23022E9318C52B7E00DF1C65 /* libxml2.dylib in Frameworks */,
 				234F0E2618F055BB001EFF40 /* libz.dylib in Frameworks */,
 				239DEA8A18B8CC4500ECF1DD /* XCTest.framework in Frameworks */,
@@ -393,6 +398,7 @@
 				2324989918DF5CD000330ACA /* DMDocumentsFileManagerTests.m */,
 				234F0E1818EC7B7C001EFF40 /* DMePubURLProtocolTests.m */,
 				239603B718FB1CB2006D0E1B /* DMBookmarkTests.m */,
+				239603BD18FDD0AA006D0E1B /* DMBookmarkManagerTests.m */,
 			);
 			path = SimpleEpubReaderTests;
 			sourceTree = "<group>";
@@ -494,6 +500,8 @@
 				234F0E1B18EC7D44001EFF40 /* DMePubURLProtocol.m */,
 				239603B918FB1DA6006D0E1B /* DMBookmark.h */,
 				239603BA18FB1DA6006D0E1B /* DMBookmark.m */,
+				239603BF18FDD13F006D0E1B /* DMBookmarkManager.h */,
+				239603C018FDD13F006D0E1B /* DMBookmarkManager.m */,
 			);
 			name = ePub;
 			sourceTree = "<group>";
@@ -614,6 +622,7 @@
 				23322D1118D1C36C002984D1 /* DMePubManager.m in Sources */,
 				23322D2A18D64D97002984D1 /* DMTableOfContentsTableViewController.m in Sources */,
 				234F0E1C18EC7D44001EFF40 /* DMePubURLProtocol.m in Sources */,
+				239603C118FDD13F006D0E1B /* DMBookmarkManager.m in Sources */,
 				23A435F518CBBA5C0060754D /* DMContainerItem.m in Sources */,
 				23A435ED18CB9DFB0060754D /* DMePubItem.m in Sources */,
 				23A72B9D18C5229B00B5B7B8 /* DDXMLNode.m in Sources */,
@@ -647,6 +656,7 @@
 				23A8039C18C913440038604A /* DMContainerFileTests.m in Sources */,
 				237DAEBB18DA418F003C0A3E /* DMePubItemViewControllerTests.m in Sources */,
 				2329FA5018D79FCE0068488A /* DMePubItemIterator.m in Sources */,
+				239603C218FDD13F006D0E1B /* DMBookmarkManager.m in Sources */,
 				23322D2318D64C95002984D1 /* DMTableOfContentsTableViewControllerTests.m in Sources */,
 				23322D2D18D77A66002984D1 /* DMTableOfContentsDelegateTests.m in Sources */,
 				234F0E1D18EC7D44001EFF40 /* DMePubURLProtocol.m in Sources */,
@@ -656,6 +666,7 @@
 				23A72B9E18C5229B00B5B7B8 /* DDXMLNode.m in Sources */,
 				23322D2F18D78361002984D1 /* DMHtmlPageViewControllerTests.m in Sources */,
 				23A435F818CF98E60060754D /* DMTableOfContentsTests.m in Sources */,
+				239603BE18FDD0AA006D0E1B /* DMBookmarkManagerTests.m in Sources */,
 				23322D1218D1C36C002984D1 /* DMePubManager.m in Sources */,
 				232498AE18DF847200330ACA /* DMDocumentsViewController.m in Sources */,
 				232498A618DF5E7A00330ACA /* DMTestableDocumentsFileManager.m in Sources */,

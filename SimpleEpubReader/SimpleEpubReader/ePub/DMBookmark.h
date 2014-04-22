@@ -16,4 +16,8 @@ typedef NSNumber BookmarkPosition;
 @property (nonatomic, strong) BookmarkPosition* filePosition;
 @property (nonatomic, strong) NSString* fileSection;
 
+- (instancetype)initWithFileName:(NSString*)fileName
+                         section:(NSString*)section
+                        position:(BookmarkPosition*)position;
+
 @end

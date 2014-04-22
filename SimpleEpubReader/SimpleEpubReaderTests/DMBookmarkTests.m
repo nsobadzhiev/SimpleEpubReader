@@ -50,6 +50,19 @@
     XCTAssertTrue([bookmark conformsToProtocol:@protocol(NSCoding)], @"Should conform to NSCoding in order to support serialization");
 }
 
+- (void)testInitializingBookmarkWithFile
+{
+    NSString* fileName = @"testFileName";
+    NSString* fileSection = @"testFileSection";
+    NSNumber* filePosition = [NSNumber numberWithInt:11];
+    bookmark = [[DMBookmark alloc] initWithFileName:fileName
+                                            section:fileSection
+                                           position:filePosition];
+    XCTAssertEqualObjects(bookmark.fileName, fileName, @"Should be able to pass all data in DMBookmark's init method and expect a fully populated object");
+    XCTAssertEqualObjects(bookmark.fileSection, fileSection, @"Should be able to pass all data in DMBookmark's init method and expect a fully populated object");
+    XCTAssertEqualObjects(bookmark.filePosition, filePosition, @"Should be able to pass all data in DMBookmark's init method and expect a fully populated object");
+}
+
 - (void)testDecodingABookmark
 {
     NSString* fileName = @"testFileName";
