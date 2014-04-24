@@ -46,6 +46,13 @@
     XCTAssertTrue([(NSArray*)[bookmarkManager allBookmarks] count] == 0, @"Shuld be able to get an array containing all bookmarks");
 }
 
+- (void)testGettingBookmarkForPath
+{
+    [bookmarkManager addBookmark:bookmark];
+    DMBookmark* foundBookmark = [bookmarkManager bookmarkForPath:bookmark.fileName];
+    XCTAssertEqualObjects(foundBookmark, bookmark, @"Should be able to find a bookmark based on a file name");
+}
+
 - (void)testAbilityToAddBookmark
 {
     [bookmarkManager addBookmark:bookmark];

@@ -19,4 +19,14 @@
     return itemIterator;
 }
 
+- (DMBookmarkManager*)bookmarkManager
+{
+    return bookmarkManager;
+}
+
+- (void)setBookmarkManager:(DMBookmarkManager *)manager
+{
+    bookmarkManager = manager;
+}
+
 @end

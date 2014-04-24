@@ -12,6 +12,7 @@
 #import "DMePubItemViewController.h"
 #import "DMTestableePubPageViewController.h"
 #import "DMTableOfContentsTableViewController.h"
+#import "DMBookmarkManager.h"
 
 @interface DMePubPageViewControllerTests : XCTestCase
 {
@@ -207,6 +208,74 @@
     nextController = (DMePubItemViewController*)[pageController pageViewController:pageController.pageViewController
                                                 viewControllerBeforeViewController:nextController];
     XCTAssertTrue([nextController isKindOfClass:[DMTableOfContentsTableViewController class]], @"Should return to table of contents after reaching the first page");
+}
+
+- (void)testSavingABookmarkAfterTurningPage
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package>    	<metadata>     <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>       	</metadata> <manifest>    <item id=\"1\" href=\"index1.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"2\" href=\"index2.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"3\" href=\"index3.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"4\" href=\"index4.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"5\" href=\"index5.html\" media-type=\"application/xhtml+xml\"/> 	</manifest>  	<spine toc=\"ncxtoc\">        <itemref idref=\"1\"/>     <itemref idref=\"2\"/>     <itemref idref=\"3\"/>     <itemref idref=\"4\"/>     <itemref idref=\"5\"/>    	</spine>        </package>";
+    NSString* epubPath = @"epubPath";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    DMContainerFileParser* containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:epubPath];
+    epubManager.contentsXmlParser = containerParser;
+    DMTestableePubPageViewController* pageViewController = [[DMTestableePubPageViewController alloc] initWithEpubManager:epubManager];
+    DMePubItem* epubItem = [DMePubItem ePubItemWithId:@"2" 
+                                            mediaType:@"application/xhtml+xml"
+                                                 href:@"index2.html"];
+    DMePubItemViewController* itemController = [[DMePubItemViewController alloc] initWithEpubItem:epubItem
+                                                                                   andEpubManager:epubManager];
+    [pageViewController pageViewController:pageViewController.pageViewController
+        viewControllerBeforeViewController:itemController];
+    DMBookmarkManager* bookmarkManager = pageViewController.bookmarkManager;
+    DMBookmark* bookmark = [[bookmarkManager allBookmarks] firstObject];
+    XCTAssertEqualObjects(bookmark.fileSection, @"index1.html", @"Should save a bookmark whenever a page is turned");
+}
+
+- (void)testLoadingFromABookmark
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package>    	<metadata>     <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>       	</metadata> <manifest>    <item id=\"1\" href=\"index1.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"2\" href=\"index2.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"3\" href=\"index3.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"4\" href=\"index4.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"5\" href=\"index5.html\" media-type=\"application/xhtml+xml\"/> 	</manifest>  	<spine toc=\"ncxtoc\">        <itemref idref=\"1\"/>     <itemref idref=\"2\"/>     <itemref idref=\"3\"/>     <itemref idref=\"4\"/>     <itemref idref=\"5\"/>    	</spine>        </package>";
+    NSString* epubPath = @"epubPath";
+    NSString* epubSection = @"index2.html";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    DMContainerFileParser* containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:epubPath];
+    epubManager.contentsXmlParser = containerParser;
+    DMBookmark* bookmark = [[DMBookmark alloc] initWithFileName:epubPath
+                                                        section:epubSection
+                                                       position:nil];
+    DMBookmarkManager* bookmarkManager = [[DMBookmarkManager alloc] init];
+    [bookmarkManager addBookmark:bookmark];
+    DMTestableePubPageViewController* pageViewController = [[DMTestableePubPageViewController alloc] initWithEpubManager:epubManager];
+    pageViewController.bookmarkManager = bookmarkManager;
+    [pageViewController view];
+    [pageViewController loadBookmarkPosition];
+
+    DMePubItemViewController* loadedPage = [pageViewController.pageViewController.viewControllers firstObject];
+    DMePubItem* epubItem = loadedPage.epubItem;
+    XCTAssertEqualObjects(epubItem.href, epubSection, @"Should loaded the added bookmark and switch directly to it");
+}
+
+- (void)testLoadingFromABookmarkAutomatically
+{
+    NSString* hardcodedContainer = @"<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>    <package>    	<metadata>     <dc:title xmlns:dc=\"http://purl.org/dc/elements/1.1/\">My Book</dc:title>       	</metadata> <manifest>    <item id=\"1\" href=\"index1.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"2\" href=\"index2.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"3\" href=\"index3.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"4\" href=\"index4.html\" media-type=\"application/xhtml+xml\"/>      <item id=\"5\" href=\"index5.html\" media-type=\"application/xhtml+xml\"/> 	</manifest>  	<spine toc=\"ncxtoc\">        <itemref idref=\"1\"/>     <itemref idref=\"2\"/>     <itemref idref=\"3\"/>     <itemref idref=\"4\"/>     <itemref idref=\"5\"/>    	</spine>        </package>";
+    NSString* epubPath = @"epubPath";
+    NSString* epubSection = @"index2.html";
+    NSData* containerData = [hardcodedContainer dataUsingEncoding:NSUTF8StringEncoding];
+    DMContainerFileParser* containerParser = [[DMContainerFileParser alloc] initWithData:containerData];
+    DMTestableePubManager* epubManager = [[DMTestableePubManager alloc] initWithEpubPath:epubPath];
+    epubManager.contentsXmlParser = containerParser;
+    DMBookmark* bookmark = [[DMBookmark alloc] initWithFileName:epubPath
+                                                        section:epubSection
+                                                       position:nil];
+    DMBookmarkManager* bookmarkManager = [[DMBookmarkManager alloc] init];
+    [bookmarkManager addBookmark:bookmark];
+    DMTestableePubPageViewController* pageViewController = [[DMTestableePubPageViewController alloc] initWithEpubManager:epubManager];
+    pageViewController.bookmarkManager = bookmarkManager;
+    [pageViewController view];
+    
+    DMePubItemViewController* loadedPage = [pageViewController.pageViewController.viewControllers firstObject];
+    DMePubItem* epubItem = loadedPage.epubItem;
+    XCTAssertEqualObjects(epubItem.href, epubSection, @"Should loaded the added bookmark and switch directly to it");
 }
 
 @end

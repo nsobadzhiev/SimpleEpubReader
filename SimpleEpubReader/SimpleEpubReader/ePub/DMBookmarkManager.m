@@ -43,17 +43,29 @@ static NSString* const k_bookmarksUserDefaultsKey = @"Bookmarks";
 
 - (void)removeBookmarksForFile:(NSString*)fileName
 {
+    DMBookmark* bookmarkToRemove = [self bookmarkForPath:fileName];
+    if (bookmarkToRemove)
+    {
+        [bookmarks removeObject:bookmarkToRemove];
+    }
+}
+
+- (DMBookmark*)bookmarkForPath:(NSString*)path
+{
     for (DMBookmark* bookmark in bookmarks)
     {
-        if ([bookmark.fileName isEqualToString:fileName])
+        if ([bookmark.fileName isEqualToString:path])
         {
-            [bookmarks removeObject:bookmark];
+            return bookmark;
         }
     }
+    return nil;
 }
 
 - (void)saveBookmarks
 {
+    // TODO: Saving bookmarks might overwrite some changed made by
+    // other bookmark managers
     NSData* encodedBookmarks = [NSKeyedArchiver archivedDataWithRootObject:bookmarks];
     [[NSUserDefaults standardUserDefaults] setObject:encodedBookmarks
                                               forKey:k_bookmarksUserDefaultsKey];

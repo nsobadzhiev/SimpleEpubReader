@@ -19,6 +19,7 @@
 - (void)addBookmark:(DMBookmark*)bookmark;
 - (void)removeBookmark:(DMBookmark*)bookmark;
 - (void)removeBookmarksForFile:(NSString*)fileName;
+- (DMBookmark*)bookmarkForPath:(NSString*)path;
 
 - (void)saveBookmarks;
 - (void)loadBookmarks;

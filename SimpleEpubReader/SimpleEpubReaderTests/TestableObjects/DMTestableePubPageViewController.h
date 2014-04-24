@@ -12,5 +12,6 @@
 @interface DMTestableePubPageViewController : DMePubPageViewController
 
 @property (nonatomic, readonly) DMePubItemIterator* iterator;
+@property (nonatomic, strong) DMBookmarkManager* bookmarkManager;
 
 @end
