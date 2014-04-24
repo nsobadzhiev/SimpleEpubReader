@@ -15,6 +15,6 @@ SimpleEpubReader is the bare minimum functionality needed in order to work with 
  1. Showing the table of contents in a table view
  1. Displaying the EPUB contents in a UIPageViewController
  1. Loading web page resources located inside the zip archive via a custom NSURLProtocol subclass
- 1. Bookmarks support (comming soon...)
+ 1. Bookmarks support (coming soon...)
 
 [EPUB spec]: http://idpf.org/epub
